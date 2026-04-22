@@ -1,0 +1,673 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ESG Signal — Sales Trigger Intelligence</title>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;600;700;800&family=IBM+Plex+Mono:wght@300;400;500&family=Figtree:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#060a12;--surf:#0d1421;--surf2:#111c2e;--surf3:#162236;
+  --bdr:#1e3048;--bdr2:#253d5e;
+  --acc:#10d4a8;--adim:rgba(16,212,168,0.1);--aglow:rgba(16,212,168,0.22);
+  --amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;
+  --txt:#dde4ef;--t2:#8ba0bc;--t3:#4d6a8a;
+  --mono:'IBM Plex Mono',monospace;--sans:'Figtree',sans-serif;--disp:'Syne',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box;}
+body{background:var(--bg);color:var(--txt);font-family:var(--sans);min-height:100vh;overflow-x:hidden;}
+body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 800px 500px at 0% 0%,rgba(16,212,168,0.035),transparent 65%),radial-gradient(ellipse 600px 500px at 100% 100%,rgba(59,130,246,0.03),transparent 65%);pointer-events:none;z-index:0;}
+body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.01) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.01) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0;}
+
+/* HEADER */
+header{position:sticky;top:0;z-index:300;display:flex;align-items:center;gap:0.8rem;padding:0 1.8rem;height:58px;background:rgba(6,10,18,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em;margin-right:auto;}
+.logo-mark{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--acc),#0891b2);display:grid;place-items:center;font-size:0.8rem;flex-shrink:0;}
+.logo em{color:var(--acc);font-style:normal;}
+.hbadge{display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-family:var(--mono);font-size:0.6rem;white-space:nowrap;}
+.hbadge.g{background:rgba(16,212,168,0.07);border:1px solid rgba(16,212,168,0.2);color:var(--acc);}
+.hbadge.d{background:var(--surf);border:1px solid var(--bdr);color:var(--t3);}
+.bdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
+.bdot.g{background:var(--acc);animation:blink 2s infinite;}
+.bdot.d{background:var(--t3);}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
+#timerTxt{font-family:var(--mono);font-size:0.6rem;color:var(--t3);}
+.icon-btn{background:transparent;border:1px solid var(--bdr);border-radius:6px;color:var(--t3);cursor:pointer;font-size:0.66rem;padding:4px 8px;font-family:var(--mono);transition:all 0.15s;}
+.icon-btn:hover{border-color:var(--bdr2);color:var(--t2);}
+
+/* SETUP */
+#setup{position:fixed;inset:0;z-index:500;background:rgba(5,7,14,0.98);display:flex;align-items:center;justify-content:center;padding:1.5rem;overflow-y:auto;}
+.setup-card{background:var(--surf);border:1px solid var(--bdr2);border-radius:18px;padding:2.2rem;max-width:500px;width:100%;}
+.setup-logo{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:1.25rem;margin-bottom:0.4rem;}
+.setup-logo em{color:var(--acc);font-style:normal;}
+.setup-sub{font-size:0.82rem;color:var(--t2);margin-bottom:1.8rem;line-height:1.55;}
+.setup-step{display:flex;gap:11px;padding:12px 14px;background:var(--surf2);border:1px solid var(--bdr);border-radius:9px;margin-bottom:1.2rem;}
+.step-num{width:22px;height:22px;border-radius:50%;background:var(--adim);border:1px solid rgba(16,212,168,0.25);color:var(--acc);font-family:var(--mono);font-size:0.65rem;display:grid;place-items:center;flex-shrink:0;margin-top:1px;}
+.step-body{font-size:0.8rem;color:var(--t2);line-height:1.55;}
+.step-body strong{color:var(--txt);display:block;margin-bottom:2px;}
+.step-body a{color:var(--acc);text-decoration:none;}
+.step-body a:hover{text-decoration:underline;}
+.free-badge{display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:2px 8px;border-radius:20px;font-family:var(--mono);font-size:0.6rem;background:rgba(16,212,168,0.08);border:1px solid rgba(16,212,168,0.2);color:var(--acc);}
+.inp-label{font-family:var(--mono);font-size:0.62rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;display:block;}
+.inp-row{display:flex;gap:8px;margin-bottom:0.5rem;}
+.setup-inp{flex:1;padding:11px 14px;background:var(--surf2);border:1px solid var(--bdr2);border-radius:8px;color:var(--txt);font-family:var(--mono);font-size:0.82rem;outline:none;transition:border-color 0.2s;}
+.setup-inp:focus{border-color:var(--acc);}
+.setup-inp::placeholder{color:var(--t3);}
+.launch-btn{width:100%;padding:13px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:1rem;color:#060a12;transition:all 0.2s;margin-top:1.2rem;}
+.launch-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px var(--aglow);}
+.setup-note{font-size:0.71rem;color:var(--t3);line-height:1.5;padding:9px 12px;background:rgba(16,212,168,0.04);border:1px solid rgba(16,212,168,0.1);border-radius:7px;margin-top:1rem;}
+.setup-err{margin-top:0.7rem;font-size:0.77rem;color:#fca5a5;display:none;padding:8px 12px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:7px;}
+
+/* MAIN */
+main{max-width:1060px;margin:0 auto;padding:1.6rem 1.5rem 5rem;position:relative;z-index:1;}
+.mtabs{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;padding:3px;margin-bottom:1.5rem;}
+.mtab{flex:1;padding:9px;border-radius:8px;border:none;background:transparent;color:var(--t2);font-size:0.84rem;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:7px;}
+.mtab.active{background:var(--surf3);color:var(--txt);border:1px solid var(--bdr2);}
+.mbadge{padding:2px 7px;border-radius:20px;font-size:0.6rem;font-family:var(--mono);background:rgba(16,212,168,0.15);color:var(--acc);}
+.mbadge.b2{background:rgba(59,130,246,0.15);color:#93c5fd;}
+
+/* REFRESH BAR */
+.rtrack{height:2px;background:var(--bdr);border-radius:2px;margin-bottom:1.2rem;overflow:hidden;}
+.rfill{height:100%;background:linear-gradient(90deg,var(--acc),#0891b2);border-radius:2px;transition:width 1s linear;}
+
+/* FEED CONTROLS */
+.feed-ctrl{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.7rem;}
+.filters{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
+.flbl{font-family:var(--mono);font-size:0.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
+.ftag{padding:4px 11px;border-radius:20px;font-size:0.7rem;font-weight:500;border:1px solid var(--bdr);background:var(--surf);color:var(--t2);cursor:pointer;transition:all 0.15s;font-family:var(--sans);}
+.ftag:hover{border-color:var(--acc);color:var(--acc);}
+.ftag.on{background:var(--adim);border-color:var(--acc);color:var(--acc);}
+.ftag.fs.on{background:rgba(34,197,94,0.09);border-color:#22c55e;color:#86efac;}
+.ftag.fi.on{background:rgba(16,185,129,0.09);border-color:#10b981;color:#6ee7b7;}
+.ftag.fr.on{background:rgba(20,184,166,0.09);border-color:#14b8a6;color:#5eead4;}
+.ftag.fw.on{background:rgba(99,102,241,0.09);border-color:#6366f1;color:#a5b4fc;}
+.ftag.fre.on{background:rgba(59,130,246,0.09);border-color:#3b82f6;color:#93c5fd;}
+.rbtn{display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:8px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.75rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all 0.15s;white-space:nowrap;}
+.rbtn:hover{border-color:var(--acc);color:var(--acc);}
+.rbtn:disabled{opacity:0.4;cursor:not-allowed;}
+.rbtn.spin svg{animation:spin 0.8s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.stage-txt{font-family:var(--mono);font-size:0.63rem;color:var(--t3);margin-bottom:0.8rem;min-height:16px;}
+
+/* SEARCH */
+.sbox{display:flex;background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:0.9rem;}
+.sbox:focus-within{border-color:var(--acc);box-shadow:0 0 0 3px var(--adim);}
+.sinput{flex:1;padding:14px 18px;background:transparent;border:none;outline:none;color:var(--txt);font-size:0.95rem;font-family:var(--sans);}
+.sinput::placeholder{color:var(--t3);}
+.sbtn{padding:10px 24px;margin:5px;border-radius:9px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:0.86rem;color:#060a12;display:flex;align-items:center;gap:6px;transition:all 0.2s;white-space:nowrap;}
+.sbtn:hover{transform:translateY(-1px);box-shadow:0 4px 18px var(--aglow);}
+.sbtn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.qrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
+.qlbl{font-family:var(--mono);font-size:0.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
+.qc{padding:4px 11px;border-radius:20px;border:1px solid var(--bdr);background:var(--surf);color:var(--t2);font-size:0.71rem;cursor:pointer;transition:all 0.15s;}
+.qc:hover{border-color:var(--acc);color:var(--acc);background:var(--adim);}
+
+/* CO HEADER */
+.co-hdr{padding:1.1rem 1.3rem;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;margin-bottom:1.1rem;}
+.co-name{font-family:var(--disp);font-size:1.2rem;font-weight:800;margin-bottom:3px;}
+.co-stats{font-family:var(--mono);font-size:0.62rem;color:var(--t3);margin-bottom:8px;display:flex;gap:14px;flex-wrap:wrap;}
+.co-stats em{color:var(--acc);font-style:normal;}
+.co-ctx{font-size:0.81rem;color:var(--t2);line-height:1.55;margin-bottom:10px;}
+.co-angle{padding:9px 13px;border-radius:7px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.18);border-left:3px solid var(--amber);}
+.albl{font-family:var(--mono);font-size:0.57rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:3px;}
+.atxt{font-size:0.79rem;color:#fde68a;line-height:1.5;}
+
+/* SUB TABS */
+.stabs{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:9px;padding:3px;margin-bottom:1.1rem;}
+.stab{flex:1;padding:6px;border-radius:6px;border:none;background:transparent;color:var(--t2);font-size:0.78rem;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all 0.15s;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;}
+.stab.active{background:var(--surf3);color:var(--txt);border:1px solid var(--bdr2);}
+.scnt{padding:1px 6px;border-radius:20px;font-size:0.58rem;font-family:var(--mono);background:rgba(16,212,168,0.15);color:var(--acc);}
+.scnt.b{background:rgba(59,130,246,0.15);color:#93c5fd;}
+
+/* CARDS */
+.news-grid{display:flex;flex-direction:column;gap:0.9rem;}
+.card{background:var(--surf);border:1px solid var(--bdr);border-radius:13px;padding:1.2rem 1.4rem;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;animation:cardIn 0.3s ease both;}
+@keyframes cardIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
+.card:hover{border-color:var(--bdr2);transform:translateY(-2px);box-shadow:0 5px 24px rgba(0,0,0,0.38);}
+.card.esg::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--acc),#0891b2);border-radius:13px 0 0 13px;}
+.card.esg{padding-left:1.7rem;}
+.ctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.65rem;gap:0.8rem;}
+.ctags{display:flex;flex-wrap:wrap;gap:4px;}
+.tag{padding:2px 8px;border-radius:20px;font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-family:var(--mono);}
+.t-esg{background:rgba(16,212,168,0.11);color:var(--acc);border:1px solid rgba(16,212,168,0.22);}
+.t-sustainability{background:rgba(34,197,94,0.11);color:#86efac;border:1px solid rgba(34,197,94,0.22);}
+.t-impact{background:rgba(16,185,129,0.11);color:#6ee7b7;border:1px solid rgba(16,185,129,0.22);}
+.t-responsible{background:rgba(20,184,166,0.11);color:#5eead4;border:1px solid rgba(20,184,166,0.22);}
+.t-stewardship{background:rgba(99,102,241,0.11);color:#a5b4fc;border:1px solid rgba(99,102,241,0.22);}
+.t-research{background:rgba(59,130,246,0.11);color:#93c5fd;border:1px solid rgba(59,130,246,0.22);}
+.t-hire{background:rgba(245,158,11,0.11);color:#fde68a;border:1px solid rgba(245,158,11,0.22);}
+.t-fund{background:rgba(239,68,68,0.11);color:#fca5a5;border:1px solid rgba(239,68,68,0.22);}
+.t-regulation{background:rgba(168,85,247,0.11);color:#d8b4fe;border:1px solid rgba(168,85,247,0.22);}
+.t-other{background:rgba(100,116,139,0.11);color:#94a3b8;border:1px solid rgba(100,116,139,0.22);}
+.cmeta{display:flex;align-items:center;gap:6px;flex-shrink:0;}
+.cco-pill{font-family:var(--mono);font-size:0.61rem;padding:2px 7px;border-radius:20px;background:rgba(59,130,246,0.09);color:#93c5fd;border:1px solid rgba(59,130,246,0.18);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.headline{font-family:var(--disp);font-weight:700;font-size:0.95rem;line-height:1.35;margin-bottom:0.5rem;}
+.headline a{color:inherit;text-decoration:none;transition:color 0.15s;}
+.headline a:hover{color:var(--acc);}
+
+/* SOURCE BLOCK */
+.src-block{display:flex;align-items:center;gap:8px;padding:7px 11px;margin-bottom:0.8rem;background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;flex-wrap:wrap;}
+.src-vdot{width:7px;height:7px;border-radius:50%;background:var(--acc);flex-shrink:0;}
+.src-name{font-family:var(--mono);font-size:0.69rem;color:var(--txt);font-weight:500;}
+.src-sep{color:var(--t3);font-size:0.7rem;}
+.src-date{font-family:var(--mono);font-size:0.64rem;color:var(--t3);}
+.src-sp{flex:1;}
+.src-real{font-family:var(--mono);font-size:0.57rem;padding:1px 7px;border-radius:20px;background:rgba(16,212,168,0.07);color:var(--acc);border:1px solid rgba(16,212,168,0.15);}
+.src-open{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:0.66rem;color:var(--acc);text-decoration:none;padding:3px 9px;border-radius:5px;border:1px solid rgba(16,212,168,0.2);background:var(--adim);transition:all 0.15s;flex-shrink:0;}
+.src-open:hover{background:rgba(16,212,168,0.16);border-color:var(--acc);}
+.src-gnews{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:0.66rem;color:var(--t2);text-decoration:none;padding:3px 9px;border-radius:5px;border:1px solid var(--bdr);background:var(--surf);transition:all 0.15s;flex-shrink:0;}
+.src-gnews:hover{border-color:var(--bdr2);color:var(--txt);}
+
+/* AI ANALYSIS */
+.ai-wrap{margin-bottom:0.8rem;}
+.ai-loading{display:flex;align-items:center;gap:8px;padding:9px 12px;background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;font-family:var(--mono);font-size:0.67rem;color:var(--t3);}
+.ai-loading svg{animation:spin 1s linear infinite;flex-shrink:0;color:var(--acc);}
+.summary{font-size:0.8rem;color:var(--t2);line-height:1.58;margin-bottom:0.75rem;}
+.sigbox{background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;padding:8px 12px;border-left:3px solid var(--acc);}
+.siglbl{font-family:var(--mono);font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--acc);margin-bottom:3px;}
+.sigtxt{font-size:0.77rem;color:var(--t2);line-height:1.5;}
+.cfoot{display:flex;justify-content:flex-end;margin-top:0.75rem;}
+.obtn{padding:6px 13px;border-radius:7px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.72rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all 0.15s;display:flex;align-items:center;gap:5px;}
+.obtn:hover{border-color:var(--acc);color:var(--acc);background:var(--adim);}
+.obtn:disabled{opacity:0.5;cursor:not-allowed;}
+
+/* OUTREACH PANEL */
+.opanel{display:none;margin-top:0.8rem;background:var(--surf2);border:1px solid rgba(16,212,168,0.18);border-radius:9px;padding:1rem;}
+.opanel.open{display:block;animation:fadeIn 0.2s ease;}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+.ophead{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
+.oplbl{font-family:var(--mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--acc);}
+.copybtn{padding:3px 9px;border-radius:5px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.68rem;cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
+.copybtn:hover{border-color:var(--acc);color:var(--acc);}
+.opsubj{font-family:var(--mono);font-size:0.62rem;color:var(--acc);margin-bottom:5px;}
+.optext{font-size:0.81rem;line-height:1.65;color:var(--txt);white-space:pre-wrap;}
+.opspin{display:flex;align-items:center;gap:7px;color:var(--t2);font-size:0.76rem;}
+.opspin svg{animation:spin 0.8s linear infinite;}
+
+/* STATES */
+.loader{display:flex;flex-direction:column;align-items:center;padding:3.5rem 2rem;gap:0.8rem;}
+.lring{width:42px;height:42px;border-radius:50%;border:3px solid var(--bdr2);border-top-color:var(--acc);animation:spin 0.8s linear infinite;}
+.ltxt{font-family:var(--mono);font-size:0.7rem;color:var(--t3);text-align:center;}
+.lsteps{margin-top:0.5rem;display:flex;flex-direction:column;gap:6px;min-width:300px;}
+.lstep{font-size:0.72rem;color:var(--t3);display:flex;align-items:center;gap:6px;transition:color 0.3s;}
+.lstep.on{color:var(--t2);}.lstep.done{color:var(--acc);}
+.placeholder{text-align:center;padding:3.5rem 2rem;}
+.phi{font-size:2.2rem;opacity:0.15;margin-bottom:0.8rem;}
+.placeholder h3{font-family:var(--disp);font-size:1rem;color:var(--t2);margin-bottom:0.4rem;}
+.placeholder p{font-size:0.8rem;color:var(--t3);max-width:380px;margin:0 auto;line-height:1.6;}
+.nores{text-align:center;padding:2.5rem;background:var(--surf);border:1px dashed var(--bdr2);border-radius:13px;}
+.nores p{color:var(--t2);font-size:0.82rem;}
+.errbox{padding:1.1rem 1.3rem;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:9px;color:#fca5a5;font-size:0.81rem;line-height:1.7;}
+
+footer{text-align:center;padding:1.8rem;font-family:var(--mono);font-size:0.6rem;color:var(--t3);position:relative;z-index:1;border-top:1px solid var(--bdr);}
+</style>
+</head>
+<body>
+
+<!-- SETUP — only shown if no proxy URL saved -->
+<div id="setup">
+  <div class="setup-card">
+    <div class="setup-logo"><div class="logo-mark">◈</div>ESG<em>Signal</em></div>
+    <p class="setup-sub">Real verified articles · AI analysis by Claude · No CORS extensions needed · Free to use</p>
+
+    <div class="setup-step">
+      <div class="step-num">1</div>
+      <div class="step-body">
+        <strong>Your backend is already deployed on Render</strong>
+        Paste your Render backend URL below. It looks like:<br>
+        <code style="font-family:var(--mono);font-size:0.75rem;color:var(--acc);">https://esg-signal-proxy.onrender.com</code>
+        <div class="free-badge">✓ Free · No CORS issues · NewsAPI key hidden server-side</div>
+      </div>
+    </div>
+
+    <div class="setup-step" style="margin-bottom:1.4rem;">
+      <div class="step-num">2</div>
+      <div class="step-body">
+        <strong>Claude AI is built-in — nothing else needed</strong>
+        Summaries, sales signals and outreach emails are powered by Claude running inside this page.
+        <div class="free-badge">✓ Free · No API key required</div>
+      </div>
+    </div>
+
+    <label class="inp-label">Your Render Backend URL</label>
+    <div class="inp-row">
+      <input class="setup-inp" id="proxyUrl" type="url" placeholder="https://your-app-name.onrender.com" autocomplete="off"/>
+    </div>
+    <button class="launch-btn" onclick="saveProxy()">Launch ESG Signal →</button>
+    <div class="setup-note">🔒 URL saved in your browser only. Your NewsAPI key stays on the server — never exposed to users.</div>
+    <div class="setup-err" id="setupErr"></div>
+  </div>
+</div>
+
+<!-- HEADER -->
+<header>
+  <div class="logo"><div class="logo-mark">◈</div>ESG<em>Signal</em></div>
+  <div class="hbadge g" id="proxyStat"><div class="bdot g"></div>Proxy connected</div>
+  <div class="hbadge g"><div class="bdot g"></div>Claude AI built-in</div>
+  <span id="timerTxt"></span>
+  <button class="icon-btn" onclick="clearProxy()">⚙ Reset</button>
+</header>
+
+<main>
+  <div class="mtabs">
+    <button class="mtab active" id="t1" onclick="sw('feed')">◈ Latest ESG News <span class="mbadge" id="feedBadge">—</span></button>
+    <button class="mtab" id="t2" onclick="sw('search')">⌕ Search by Company <span class="mbadge b2">ICP Lookup</span></button>
+  </div>
+
+  <!-- TAB 1: FEED -->
+  <div id="p1">
+    <div class="rtrack"><div class="rfill" id="rfill" style="width:100%"></div></div>
+    <div class="feed-ctrl">
+      <div class="filters">
+        <span class="flbl">Topic:</span>
+        <button class="ftag on"     data-f="esg"           onclick="tf(this)">ESG</button>
+        <button class="ftag fs on"  data-f="sustainability" onclick="tf(this)">Sustainability</button>
+        <button class="ftag fi on"  data-f="impact"        onclick="tf(this)">Impact</button>
+        <button class="ftag fr on"  data-f="responsible"   onclick="tf(this)">Responsible Inv.</button>
+        <button class="ftag fw on"  data-f="stewardship"   onclick="tf(this)">Stewardship</button>
+        <button class="ftag fre on" data-f="research"      onclick="tf(this)">ESG Research</button>
+      </div>
+      <button class="rbtn" id="rfb" onclick="loadFeed()">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        Refresh
+      </button>
+    </div>
+    <div class="stage-txt" id="stageTxt"></div>
+    <div id="fc"></div>
+  </div>
+
+  <!-- TAB 2: SEARCH -->
+  <div id="p2" style="display:none">
+    <div style="margin-bottom:1.6rem;">
+      <div class="sbox">
+        <input class="sinput" id="si" type="text" placeholder="Enter company — e.g. BlackRock, KKR, Amundi, Schroders…" autocomplete="off"/>
+        <button class="sbtn" id="sb" onclick="runSearch()">
+          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search
+        </button>
+      </div>
+      <div class="qrow">
+        <span class="qlbl">From your 550:</span>
+        <span class="qc" onclick="qs('BlackRock')">BlackRock</span>
+        <span class="qc" onclick="qs('KKR')">KKR</span>
+        <span class="qc" onclick="qs('Amundi')">Amundi</span>
+        <span class="qc" onclick="qs('Schroders')">Schroders</span>
+        <span class="qc" onclick="qs('Tikehau Capital')">Tikehau Capital</span>
+        <span class="qc" onclick="qs('Bridgepoint')">Bridgepoint</span>
+        <span class="qc" onclick="qs('Carlyle')">Carlyle</span>
+        <span class="qc" onclick="qs('Partners Group')">Partners Group</span>
+        <span class="qc" onclick="qs('ICG')">ICG</span>
+        <span class="qc" onclick="qs('DWS')">DWS</span>
+        <span class="qc" onclick="qs('Nuveen')">Nuveen</span>
+        <span class="qc" onclick="qs('Apollo Global')">Apollo</span>
+        <span class="qc" onclick="qs('Allianz GI')">Allianz GI</span>
+        <span class="qc" onclick="qs('Brookfield Asset Management')">Brookfield</span>
+      </div>
+    </div>
+    <div id="sc">
+      <div class="placeholder">
+        <div class="phi">⌕</div>
+        <h3>Search any company</h3>
+        <p>Real articles from 150,000+ verified sources — last 30 days only. Claude classifies, summarises and generates a tailored sales signal for every article.</p>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer>ESG Signal · Real articles via NewsAPI · Analysis by Claude (built-in) · 30-day rolling window · Always verify before outreach</footer>
+
+<script>
+const CLAUDE_API = "https://api.anthropic.com/v1/messages";
+let PROXY_URL = '';
+let feedArticles = [], activeF = new Set(['esg','sustainability','impact','responsible','stewardship','research']);
+let coData = null, coSub = 'esg';
+let refreshTimer = null, refreshCountdown = 1800;
+const REFRESH_SEC = 1800;
+
+const FEED_QUERIES = [
+  'ESG "private equity" OR "asset management" OR "venture capital" OR "investment"',
+  '"responsible investment" OR "impact investing" finance sustainability',
+  'stewardship "shareholder engagement" OR "voting policy" investment fund',
+  '"net zero" OR "carbon neutral" finance investment fund 2024 2025',
+  '"ESG rating" OR "ESG score" OR "ESG fund" financial institution',
+  'SFDR OR TCFD OR CSRD "asset manager" OR "investment fund"',
+  '"head of ESG" OR "chief sustainability officer" appointed finance investment',
+  '"impact fund" OR "green bond" OR "social bond" launch',
+];
+
+const TOPIC_MAP = {
+  esg:['esg','environmental social governance'],
+  sustainability:['sustainab','green finance','climate risk','climate change'],
+  impact:['impact invest','impact fund','social impact'],
+  responsible:['responsible invest','responsible finance',' pri ','un sdg','sdg'],
+  stewardship:['stewardship','shareholder','engagement','voting','proxy'],
+  research:['research','report','survey','analysis','white paper'],
+  hire:['appoints','appointed','hired','head of esg','chief sustainability','sustainability director'],
+  fund:['fund launch','new fund','fundrais','raises','closes fund','billion fund'],
+  regulation:['sfdr','tcfd','csrd','article 8','article 9','regulat','compliance'],
+};
+const ESG_KW = ['esg','sustainab','responsible invest','impact invest','stewardship','net zero','net-zero','carbon','climate finance','sfdr','tcfd','csrd','article 8','article 9',' pri ','un sdg','green bond','social bond','engagement','shareholder','voting','governance','impact fund','esg rating','esg score'];
+
+// ── SETUP ──
+function saveProxy() {
+  let url = document.getElementById('proxyUrl').value.trim().replace(/\/+$/, '');
+  const err = document.getElementById('setupErr');
+  if (!url || !url.startsWith('http')) {
+    err.textContent = 'Please enter a valid URL starting with https://';
+    err.style.display = 'block'; return;
+  }
+  PROXY_URL = url;
+  localStorage.setItem('esg_proxy_url', url);
+  document.getElementById('setup').style.display = 'none';
+  init();
+}
+function clearProxy() {
+  if (!confirm('Reset backend URL?')) return;
+  localStorage.removeItem('esg_proxy_url');
+  location.reload();
+}
+function tryAutoLoad() {
+  const u = localStorage.getItem('esg_proxy_url');
+  if (u) { PROXY_URL = u; document.getElementById('setup').style.display = 'none'; init(); }
+}
+
+// ── INIT & TIMER ──
+function init() { loadFeed(); startTimer(); }
+function startTimer() {
+  clearInterval(refreshTimer);
+  refreshCountdown = REFRESH_SEC;
+  refreshTimer = setInterval(() => {
+    refreshCountdown--;
+    const m = Math.floor(refreshCountdown/60), s = refreshCountdown%60;
+    document.getElementById('timerTxt').textContent = `Auto-refresh in ${m}:${s.toString().padStart(2,'0')}`;
+    const pct = ((REFRESH_SEC-refreshCountdown)/REFRESH_SEC)*100;
+    const f = document.getElementById('rfill');
+    if (f) f.style.width = (100-pct)+'%';
+    if (refreshCountdown <= 0) { loadFeed(); refreshCountdown = REFRESH_SEC; }
+  }, 1000);
+}
+
+// ── TABS / FILTERS ──
+function sw(t) {
+  document.getElementById('p1').style.display = t==='feed'?'':'none';
+  document.getElementById('p2').style.display = t==='search'?'':'none';
+  document.getElementById('t1').classList.toggle('active', t==='feed');
+  document.getElementById('t2').classList.toggle('active', t==='search');
+}
+function tf(btn) {
+  const f = btn.dataset.f;
+  activeF.has(f) ? (activeF.delete(f), btn.classList.remove('on')) : (activeF.add(f), btn.classList.add('on'));
+  renderFeed();
+}
+
+// ── NEWS FETCH via proxy (no CORS issues) ──
+async function newsFetch(query, pageSize=10) {
+  const from = new Date(Date.now()-30*24*60*60*1000).toISOString().split('T')[0];
+  const params = new URLSearchParams({ q: query, pageSize, from });
+  const r = await fetch(`${PROXY_URL}/news?${params}`);
+  const d = await r.json();
+  if (d.error) throw new Error(d.error);
+  return (d.articles||[]).filter(a => a.title && a.title !== '[Removed]');
+}
+
+function dedup(articles) {
+  const seen = new Set();
+  return articles.filter(a => { const k=a.url||a.title; if(seen.has(k))return false; seen.add(k);return true; });
+}
+function enforce30(articles) {
+  const cutoff = Date.now()-30*24*60*60*1000;
+  return articles.filter(a => a.publishedAt && new Date(a.publishedAt).getTime()>cutoff);
+}
+function classify(a) {
+  const txt = ((a.title||'')+(a.description||'')+(a.content||'')).toLowerCase();
+  const isESG = ESG_KW.some(k=>txt.includes(k));
+  const tags = [];
+  for (const [tag,kws] of Object.entries(TOPIC_MAP)) { if(kws.some(k=>txt.includes(k))) tags.push(tag); }
+  if (!tags.length) tags.push(isESG?'esg':'other');
+  return {isESG, tags};
+}
+function fmtDate(iso) {
+  if(!iso)return'';
+  try{ return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'}); }catch{ return iso.split('T')[0]; }
+}
+
+// ── CLAUDE ANALYSIS (built-in, batched) ──
+async function claudeAnalyse(articles) {
+  const results = {};
+  for (let i=0; i<articles.length; i+=6) {
+    const batch = articles.slice(i,i+6);
+    const prompt = batch.map((a,idx)=>`[${idx}] Title: ${a.title}\nSource: ${a.source?.name||'Unknown'}\nDate: ${a.publishedAt}\nDescription: ${a.description||'N/A'}`).join('\n\n');
+    try {
+      const r = await fetch(CLAUDE_API, {
+        method:'POST', headers:{'Content-Type':'application/json'},
+        body: JSON.stringify({
+          model:'claude-sonnet-4-20250514', max_tokens:2000,
+          system:`You are an ESG sales intelligence analyst for a B2B software company. Analyse each news article and return a JSON array (one object per article, index 0 to ${batch.length-1}):
+[{"summary":"2 clear sentences summarising the news","sales_signal":"1-2 sentences: what pain point does this reveal and what should a salesperson say when reaching out to sell ESG/sustainability reporting software?","tags":["1-3 tags from: esg,sustainability,impact,responsible,stewardship,research,hire,fund,regulation,other"],"relevance":"high|medium|low"}]
+Return ONLY the JSON array. No markdown. No extra text.`,
+          messages:[{role:'user',content:prompt}]
+        })
+      });
+      if(!r.ok) throw new Error(`Claude ${r.status}`);
+      const d = await r.json();
+      const txt = (d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim();
+      const clean = txt.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
+      const arr = JSON.parse(clean);
+      batch.forEach((a,idx)=>{ if(arr[idx]) results[a.url||a.title]=arr[idx]; });
+    } catch(e) {
+      batch.forEach(a=>{ results[a.url||a.title]={summary:'',sales_signal:'',tags:['other'],relevance:'medium'}; });
+    }
+  }
+  return results;
+}
+
+async function claudeContext(company, headlines) {
+  try {
+    const r = await fetch(CLAUDE_API, {
+      method:'POST', headers:{'Content-Type':'application/json'},
+      body: JSON.stringify({
+        model:'claude-sonnet-4-20250514', max_tokens:400,
+        messages:[{role:'user',content:`Recent ESG headlines about ${company}:\n${headlines||'(none found in last 30 days)'}\n\nProvide:\n1. 2-sentence summary of ${company}'s current ESG posture\n2. The single best outreach angle RIGHT NOW for selling ESG data/reporting software\n\nReturn ONLY JSON: {"context":"...","outreach_angle":"..."}`}]
+      })
+    });
+    const d = await r.json();
+    const txt = (d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim();
+    const clean = txt.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
+    return JSON.parse(clean.slice(clean.indexOf('{'),clean.lastIndexOf('}')+1));
+  } catch{ return {context:'',outreach_angle:''}; }
+}
+
+// ── FEED ──
+async function loadFeed() {
+  const btn = document.getElementById('rfb');
+  btn.disabled=true; btn.classList.add('spin');
+  setStage('');
+  document.getElementById('fc').innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching verified ESG news…</div><div class="lsteps"><div class="lstep on" id="ls1">⟳ Querying news proxy across ESG topics…</div><div class="lstep" id="ls2">⟳ Deduplicating &amp; enforcing 30-day window…</div><div class="lstep" id="ls3">⟳ Claude AI analysing &amp; writing sales signals…</div><div class="lstep" id="ls4">⟳ Rendering feed…</div></div></div>`;
+  try {
+    lsDone(1);
+    setStage('Fetching news via proxy…');
+    const batches = await Promise.all(FEED_QUERIES.map(q=>newsFetch(q,8).catch(()=>[])));
+    let raw = dedup(enforce30(batches.flat()));
+    raw.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
+    raw = raw.slice(0,40);
+    lsDone(2);
+    setStage(`${raw.length} verified articles found — running Claude AI analysis…`);
+    lsDone(3);
+    const analysis = await claudeAnalyse(raw);
+    feedArticles = raw.map(a=>({...a,_ai:analysis[a.url||a.title]||{},_cls:classify(a)}));
+    const ro={high:0,medium:1,low:2};
+    feedArticles.sort((a,b)=>{
+      const rd=(ro[a._ai.relevance]||1)-(ro[b._ai.relevance]||1);
+      return rd!==0?rd:new Date(b.publishedAt)-new Date(a.publishedAt);
+    });
+    lsDone(4);
+    document.getElementById('feedBadge').textContent=feedArticles.length;
+    document.getElementById('proxyStat').innerHTML=`<div class="bdot g"></div>${feedArticles.length} articles · ${new Date().toLocaleTimeString()}`;
+    setStage(''); renderFeed(); startTimer();
+  } catch(e) {
+    document.getElementById('fc').innerHTML=`<div class="errbox">⚠ <strong>Error:</strong> ${h(e.message)}<br><br>Make sure your Render backend is running. Visit your Render URL directly — if it shows a JSON response, the proxy is working. If it's sleeping (free tier), wait 30 seconds and try again.</div>`;
+    setStage('');
+  }
+  btn.disabled=false; btn.classList.remove('spin');
+}
+function lsDone(n){const el=document.getElementById('ls'+n);if(el)el.classList.add('done');}
+function setStage(t){const el=document.getElementById('stageTxt');if(el){el.textContent=t;el.style.display=t?'block':'none';}}
+
+function renderFeed() {
+  const items = feedArticles.filter(a=>(a._ai.tags||a._cls.tags||[]).some(t=>activeF.has(t)));
+  const el = document.getElementById('fc');
+  if(!items.length){el.innerHTML=`<div class="nores"><p>No articles match the selected filters.</p></div>`;return;}
+  el.innerHTML=`<div class="news-grid">${items.map((a,i)=>cardHtml(a,i,'feed')).join('')}</div>`;
+}
+
+// ── COMPANY SEARCH ──
+function qs(n){document.getElementById('si').value=n;sw('search');runSearch();}
+document.addEventListener('DOMContentLoaded',()=>{
+  document.getElementById('si').addEventListener('keydown',e=>{if(e.key==='Enter')runSearch();});
+  tryAutoLoad();
+});
+
+async function runSearch() {
+  const q = document.getElementById('si').value.trim(); if(!q)return;
+  sw('search'); document.getElementById('sb').disabled=true; coData=null; coSub='esg';
+  document.getElementById('sc').innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching news for "${h(q)}"…</div><div class="lsteps"><div class="lstep on" id="cs1">⟳ Searching via proxy — last 30 days…</div><div class="lstep" id="cs2">⟳ Classifying ESG vs general news…</div><div class="lstep" id="cs3">⟳ Claude AI generating analysis &amp; sales signals…</div><div class="lstep" id="cs4">⟳ Building outreach context…</div></div></div>`;
+  try {
+    const [esgRaw,genRaw] = await Promise.all([
+      newsFetch(`"${q}" ESG sustainability "responsible investment" stewardship impact`,15),
+      newsFetch(`"${q}"`,10),
+    ]);
+    csStep(1);
+    const all = dedup(enforce30([...esgRaw,...genRaw]));
+    all.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
+    const esgA = all.filter(a=>classify(a).isESG);
+    const othA = all.filter(a=>!classify(a).isESG);
+    csStep(2);
+    const analysis = await claudeAnalyse(all);
+    csStep(3);
+    const headlines = esgA.slice(0,5).map(a=>a.title).join('\n');
+    const context = await claudeContext(q, headlines);
+    csStep(4);
+    coData = {
+      company:q,
+      esg:  esgA.map(a=>({...a,_ai:analysis[a.url||a.title]||{},_cls:classify(a)})).sort((a,b)=>({high:0,medium:1,low:2}[a._ai?.relevance]||1)-({high:0,medium:1,low:2}[b._ai?.relevance]||1)),
+      other:othA.map(a=>({...a,_ai:analysis[a.url||a.title]||{},_cls:classify(a)})).sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt)),
+      context,
+    };
+    coSub='esg'; renderCoResults();
+  } catch(e) {
+    document.getElementById('sc').innerHTML=`<div class="errbox">⚠ ${h(e.message)}</div>`;
+  }
+  document.getElementById('sb').disabled=false;
+}
+function csStep(n){for(let i=1;i<=n;i++){const el=document.getElementById('cs'+i);if(el)el.classList.add(i<n?'done':'on');}}
+
+function renderCoResults() {
+  if(!coData)return;
+  const d=coData;
+  document.getElementById('sc').innerHTML=`
+    <div class="co-hdr">
+      <div class="co-name">${h(d.company)}</div>
+      <div class="co-stats"><span>ESG articles: <em>${d.esg.length}</em></span><span>Other news: <em>${d.other.length}</em></span><span>Window: <em>last 30 days</em></span><span>Source: <em>NewsAPI (verified)</em></span></div>
+      ${d.context?.context?`<div class="co-ctx">${h(d.context.context)}</div>`:''}
+      ${d.context?.outreach_angle?`<div class="co-angle"><div class="albl">⚡ Best Outreach Angle Right Now</div><div class="atxt">${h(d.context.outreach_angle)}</div></div>`:''}
+    </div>
+    <div class="stabs">
+      <button class="stab active" id="st1" onclick="sst('esg',this)">◈ ESG & Sustainability <span class="scnt">${d.esg.length}</span></button>
+      <button class="stab" id="st2" onclick="sst('other',this)">○ Other News <span class="scnt b">${d.other.length}</span></button>
+    </div>
+    <div id="cc"></div>`;
+  renderSubTab('esg');
+}
+function sst(t,btn){coSub=t;document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderSubTab(t);}
+function renderSubTab(t){
+  const items=(t==='esg'?coData.esg:coData.other)||[];
+  const el=document.getElementById('cc');if(!el)return;
+  if(!items.length){el.innerHTML=`<div class="nores"><p>${t==='esg'?`No ESG news found for ${h(coData.company)} in the last 30 days.`:'No other news found.'}</p></div>`;return;}
+  el.innerHTML=`<div class="news-grid">${items.map((a,i)=>cardHtml(a,i,'co-'+t)).join('')}</div>`;
+}
+
+// ── CARD ──
+function cardHtml(article,i,ns){
+  const isESG=ns==='feed'||ns==='co-esg';
+  const ai=article._ai||{};
+  const tags=[...new Set(ai.tags||article._cls?.tags||['other'])].slice(0,3);
+  const tagsHtml=tags.map(t=>`<span class="tag t-${t}">${t}</span>`).join('');
+  const srcName=article.source?.name||'Unknown Source';
+  const pubDate=fmtDate(article.publishedAt);
+  const url=article.url||null;
+  const gnews=`https://news.google.com/search?q=${encodeURIComponent(article.title||'')}`;
+  return `
+  <div class="card ${isESG?'esg':''}" style="animation-delay:${Math.min(i,15)*0.04}s">
+    <div class="ctop">
+      <div class="ctags">${tagsHtml}</div>
+      <div class="cmeta">${ns==='feed'?`<span class="cco-pill">${h(srcName)}</span>`:''}</div>
+    </div>
+    <div class="headline">${url?`<a href="${h(url)}" target="_blank" rel="noopener">${h(article.title||'Untitled')}</a>`:h(article.title||'Untitled')}</div>
+    <div class="src-block">
+      <div class="src-vdot"></div>
+      <span class="src-name">${h(srcName)}</span>
+      <span class="src-sep">·</span>
+      <span class="src-date">${pubDate}</span>
+      <span class="src-sp"></span>
+      <span class="src-real">✓ Verified article</span>
+      ${url?`<a class="src-open" href="${h(url)}" target="_blank" rel="noopener">↗ Open</a>`:`<a class="src-gnews" href="${gnews}" target="_blank" rel="noopener">⌕ Google News</a>`}
+    </div>
+    <div class="ai-wrap">
+      ${ai.summary
+        ?`<div class="summary">${h(ai.summary)}</div>${ai.sales_signal?`<div class="sigbox"><div class="siglbl">Sales Signal</div><div class="sigtxt">${h(ai.sales_signal)}</div></div>`:''}`
+        :`<div class="ai-loading"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>AI analysis unavailable</div>`
+      }
+    </div>
+    <div class="cfoot">
+      <button class="obtn" onclick="draftOutreach('${ns}',${i},this)">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Draft Outreach Email
+      </button>
+    </div>
+    <div class="opanel" id="op-${ns}-${i}"></div>
+  </div>`;
+}
+
+// ── OUTREACH ──
+async function draftOutreach(ns,i,btn){
+  const pid=`op-${ns}-${i}`;const panel=document.getElementById(pid);if(!panel)return;
+  if(panel.classList.contains('open')){panel.classList.remove('open');return;}
+  let article;
+  if(ns==='feed'){const vis=feedArticles.filter(a=>(a._ai?.tags||a._cls?.tags||[]).some(t=>activeF.has(t)));article=vis[i];}
+  else if(ns==='co-esg')article=(coData?.esg||[])[i];
+  else article=(coData?.other||[])[i];
+  if(!article)return;
+  const company=coData?.company||article.source?.name||'the company';
+  panel.classList.add('open');
+  panel.innerHTML=`<div class="opspin"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Drafting email…</div>`;
+  btn.disabled=true;
+  try{
+    const r=await fetch(CLAUDE_API,{
+      method:'POST',headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({
+        model:'claude-sonnet-4-20250514',max_tokens:600,
+        messages:[{role:'user',content:`Write a B2B cold outreach email for selling ESG/sustainability reporting software.
+Target: ${company}
+News: ${article.title}
+Summary: ${article._ai?.summary||article.description||''}
+Sales signal: ${article._ai?.sales_signal||''}
+Source: ${article.source?.name||''} (${fmtDate(article.publishedAt)})
+Rules: MAX 5 sentences. Open by referencing this specific news. Connect to a pain point (ESG reporting burden, regulatory pressure, investor scrutiny). One soft CTA — 15-min call or a single question. Warm, professional, never pushy. Do NOT name any product.
+Format: Line 1 = subject only. Blank line. Email body. Nothing else.`}]
+      })
+    });
+    const d=await r.json();
+    const txt=(d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim();
+    const lines=txt.split('\n');
+    const subj=lines[0].replace(/^Subject:\s*/i,'');
+    const body=lines.slice(lines[1]===''?2:1).join('\n').trim();
+    panel.innerHTML=`<div class="ophead"><div class="oplbl">✦ Outreach — based on real verified news</div><button class="copybtn" onclick="cp(\`${ej(txt)}\`)">Copy</button></div><div class="opsubj">SUBJECT: ${h(subj)}</div><div class="optext">${h(body)}</div>`;
+  }catch(e){panel.innerHTML=`<div style="color:#fca5a5;font-size:0.8rem;">Failed. ${h(e.message)}</div>`;}
+  btn.disabled=false;
+}
+
+function cp(t){navigator.clipboard.writeText(t).then(()=>{document.querySelectorAll('.copybtn').forEach(b=>{if(b.textContent==='Copy'){b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',2000);}});});}
+function h(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
+function ej(s){if(!s)return'';return String(s).replace(/\\/g,'\\\\').replace(/`/g,'\\`').replace(/\$/g,'\\$');}
+</script>
+</body>
+</html>
