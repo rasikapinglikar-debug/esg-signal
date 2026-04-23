@@ -12,61 +12,67 @@
   --acc:#10d4a8;--adim:rgba(16,212,168,0.1);--aglow:rgba(16,212,168,0.22);
   --amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;
   --txt:#dde4ef;--t2:#8ba0bc;--t3:#4d6a8a;
-  --mono:'IBM Plex Mono',monospace;--sans:'Figtree',sans-serif;--disp:'Syne',sans-serif;
+  --mono:"IBM Plex Mono",monospace;--sans:"Figtree",sans-serif;--disp:"Syne",sans-serif;
 }
 *{margin:0;padding:0;box-sizing:border-box;}
 body{background:var(--bg);color:var(--txt);font-family:var(--sans);min-height:100vh;overflow-x:hidden;}
-body::before{content:'';position:fixed;inset:0;background:radial-gradient(ellipse 800px 500px at 0% 0%,rgba(16,212,168,0.035),transparent 65%),radial-gradient(ellipse 600px 500px at 100% 100%,rgba(59,130,246,0.03),transparent 65%);pointer-events:none;z-index:0;}
-body::after{content:'';position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.01) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.01) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0;}
+body::before{content:"";position:fixed;inset:0;background:radial-gradient(ellipse 800px 500px at 0% 0%,rgba(16,212,168,0.035),transparent 65%),radial-gradient(ellipse 600px 500px at 100% 100%,rgba(59,130,246,0.03),transparent 65%);pointer-events:none;z-index:0;}
+body::after{content:"";position:fixed;inset:0;background-image:linear-gradient(rgba(255,255,255,0.01) 1px,transparent 1px),linear-gradient(90deg,rgba(255,255,255,0.01) 1px,transparent 1px);background-size:56px 56px;pointer-events:none;z-index:0;}
 
-header{position:sticky;top:0;z-index:300;display:flex;align-items:center;gap:0.8rem;padding:0 1.8rem;height:58px;background:rgba(6,10,18,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);}
-.logo{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:800;font-size:1.15rem;letter-spacing:-0.02em;margin-right:auto;}
-.logo-mark{width:28px;height:28px;border-radius:6px;background:linear-gradient(135deg,var(--acc),#0891b2);display:grid;place-items:center;font-size:0.8rem;flex-shrink:0;}
+header{position:sticky;top:0;z-index:300;display:flex;align-items:center;gap:0.8rem;padding:0 1.5rem;height:56px;background:rgba(6,10,18,0.95);backdrop-filter:blur(20px);border-bottom:1px solid var(--bdr);}
+.logo{display:flex;align-items:center;gap:9px;font-family:var(--disp);font-weight:800;font-size:1.1rem;letter-spacing:-0.02em;margin-right:auto;}
+.logo-mark{width:26px;height:26px;border-radius:6px;background:linear-gradient(135deg,var(--acc),#0891b2);display:grid;place-items:center;font-size:0.75rem;flex-shrink:0;}
 .logo em{color:var(--acc);font-style:normal;}
-.hbadge{display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-family:var(--mono);font-size:0.6rem;white-space:nowrap;}
+.hbadge{display:flex;align-items:center;gap:5px;padding:3px 10px;border-radius:20px;font-family:var(--mono);font-size:0.58rem;white-space:nowrap;}
 .hbadge.g{background:rgba(16,212,168,0.07);border:1px solid rgba(16,212,168,0.2);color:var(--acc);}
-.hbadge.d{background:var(--surf);border:1px solid var(--bdr);color:var(--t3);}
-.bdot{width:5px;height:5px;border-radius:50%;flex-shrink:0;}
-.bdot.g{background:var(--acc);animation:blink 2s infinite;}
+.bdot{width:5px;height:5px;border-radius:50%;background:var(--acc);animation:blink 2s infinite;}
 @keyframes blink{0%,100%{opacity:1}50%{opacity:0.2}}
-#timerTxt{font-family:var(--mono);font-size:0.6rem;color:var(--t3);}
-.icon-btn{background:transparent;border:1px solid var(--bdr);border-radius:6px;color:var(--t3);cursor:pointer;font-size:0.66rem;padding:4px 8px;font-family:var(--mono);transition:all 0.15s;}
+#timerTxt{font-family:var(--mono);font-size:0.58rem;color:var(--t3);}
+.icon-btn{background:transparent;border:1px solid var(--bdr);border-radius:6px;color:var(--t3);cursor:pointer;font-size:0.64rem;padding:4px 8px;font-family:var(--mono);transition:all 0.15s;}
 .icon-btn:hover{border-color:var(--bdr2);color:var(--t2);}
 
+/* SETUP */
 #setup{position:fixed;inset:0;z-index:500;background:rgba(5,7,14,0.98);display:flex;align-items:center;justify-content:center;padding:1.5rem;overflow-y:auto;}
-.setup-card{background:var(--surf);border:1px solid var(--bdr2);border-radius:18px;padding:2.2rem;max-width:480px;width:100%;}
-.setup-logo{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:1.25rem;margin-bottom:0.4rem;}
+.setup-card{background:var(--surf);border:1px solid var(--bdr2);border-radius:18px;padding:2rem;max-width:460px;width:100%;}
+.setup-logo{display:flex;align-items:center;gap:10px;font-family:var(--disp);font-weight:800;font-size:1.2rem;margin-bottom:0.4rem;}
 .setup-logo em{color:var(--acc);font-style:normal;}
-.setup-sub{font-size:0.82rem;color:var(--t2);margin-bottom:1.6rem;line-height:1.55;}
-.setup-step{display:flex;gap:11px;padding:12px 14px;background:var(--surf2);border:1px solid var(--bdr);border-radius:9px;margin-bottom:1rem;}
-.snum{width:22px;height:22px;border-radius:50%;background:var(--adim);border:1px solid rgba(16,212,168,0.25);color:var(--acc);font-family:var(--mono);font-size:0.65rem;display:grid;place-items:center;flex-shrink:0;margin-top:1px;}
-.sbody{font-size:0.8rem;color:var(--t2);line-height:1.55;}
+.setup-sub{font-size:0.81rem;color:var(--t2);margin-bottom:1.5rem;line-height:1.55;}
+.setup-step{display:flex;gap:10px;padding:11px 13px;background:var(--surf2);border:1px solid var(--bdr);border-radius:9px;margin-bottom:1rem;}
+.snum{width:20px;height:20px;border-radius:50%;background:var(--adim);border:1px solid rgba(16,212,168,0.25);color:var(--acc);font-family:var(--mono);font-size:0.62rem;display:grid;place-items:center;flex-shrink:0;margin-top:1px;}
+.sbody{font-size:0.79rem;color:var(--t2);line-height:1.5;}
 .sbody strong{color:var(--txt);display:block;margin-bottom:2px;}
-.free-b{display:inline-flex;align-items:center;gap:4px;margin-top:5px;padding:2px 8px;border-radius:20px;font-family:var(--mono);font-size:0.6rem;background:rgba(16,212,168,0.08);border:1px solid rgba(16,212,168,0.2);color:var(--acc);}
-.inp-lbl{font-family:var(--mono);font-size:0.62rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:5px;display:block;}
-.inp-row{display:flex;gap:8px;margin-bottom:0.5rem;}
-.setup-inp{flex:1;padding:11px 14px;background:var(--surf2);border:1px solid var(--bdr2);border-radius:8px;color:var(--txt);font-family:var(--mono);font-size:0.82rem;outline:none;transition:border-color 0.2s;}
+.free-b{display:inline-flex;align-items:center;gap:4px;margin-top:4px;padding:2px 8px;border-radius:20px;font-family:var(--mono);font-size:0.58rem;background:rgba(16,212,168,0.08);border:1px solid rgba(16,212,168,0.2);color:var(--acc);}
+.inp-lbl{font-family:var(--mono);font-size:0.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:4px;display:block;}
+.setup-inp{width:100%;padding:10px 13px;background:var(--surf2);border:1px solid var(--bdr2);border-radius:8px;color:var(--txt);font-family:var(--mono);font-size:0.8rem;outline:none;transition:border-color 0.2s;margin-bottom:1rem;}
 .setup-inp:focus{border-color:var(--acc);}
 .setup-inp::placeholder{color:var(--t3);}
-.launch-btn{width:100%;padding:13px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:1rem;color:#060a12;transition:all 0.2s;margin-top:1.1rem;}
+.launch-btn{width:100%;padding:12px;border-radius:10px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:0.95rem;color:#060a12;transition:all 0.2s;}
 .launch-btn:hover{transform:translateY(-1px);box-shadow:0 6px 24px var(--aglow);}
-.setup-note{font-size:0.71rem;color:var(--t3);line-height:1.5;padding:9px 12px;background:rgba(16,212,168,0.04);border:1px solid rgba(16,212,168,0.1);border-radius:7px;margin-top:1rem;}
-.setup-err{margin-top:0.7rem;font-size:0.77rem;color:#fca5a5;display:none;padding:8px 12px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:7px;}
+.setup-note{font-size:0.69rem;color:var(--t3);line-height:1.5;padding:8px 11px;background:rgba(16,212,168,0.04);border:1px solid rgba(16,212,168,0.1);border-radius:7px;margin-top:0.9rem;}
+.setup-err{margin-top:0.6rem;font-size:0.75rem;color:#fca5a5;display:none;padding:7px 11px;background:rgba(239,68,68,0.06);border:1px solid rgba(239,68,68,0.15);border-radius:7px;}
 
-main{max-width:1060px;margin:0 auto;padding:1.6rem 1.5rem 5rem;position:relative;z-index:1;}
-.mtabs{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;padding:3px;margin-bottom:1.5rem;}
-.mtab{flex:1;padding:9px;border-radius:8px;border:none;background:transparent;color:var(--t2);font-size:0.84rem;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:7px;}
+main{max-width:1080px;margin:0 auto;padding:1.4rem 1.5rem 5rem;position:relative;z-index:1;}
+
+/* MAIN TABS — now includes AE tabs */
+.main-tabs-wrap{margin-bottom:1.4rem;}
+.tab-row-1{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;padding:3px;margin-bottom:6px;}
+.tab-row-2{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;padding:3px;}
+.mtab{flex:1;padding:8px 6px;border-radius:8px;border:none;background:transparent;color:var(--t2);font-size:0.78rem;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;}
 .mtab.active{background:var(--surf3);color:var(--txt);border:1px solid var(--bdr2);}
-.mbadge{padding:2px 7px;border-radius:20px;font-size:0.6rem;font-family:var(--mono);background:rgba(16,212,168,0.15);color:var(--acc);}
+.mtab.ae-tab.active{background:rgba(59,130,246,0.12);border-color:var(--blue);color:#93c5fd;}
+.mbadge{padding:1px 6px;border-radius:20px;font-size:0.58rem;font-family:var(--mono);background:rgba(16,212,168,0.15);color:var(--acc);}
 .mbadge.b2{background:rgba(59,130,246,0.15);color:#93c5fd;}
+.mbadge.bae{background:rgba(59,130,246,0.15);color:#93c5fd;}
 
-.rtrack{height:2px;background:var(--bdr);border-radius:2px;margin-bottom:1.2rem;overflow:hidden;}
+/* REFRESH BAR */
+.rtrack{height:2px;background:var(--bdr);border-radius:2px;margin-bottom:1.1rem;overflow:hidden;}
 .rfill{height:100%;background:linear-gradient(90deg,var(--acc),#0891b2);border-radius:2px;transition:width 1s linear;}
 
+/* FEED CONTROLS */
 .feed-ctrl{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.7rem;}
 .filters{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
-.flbl{font-family:var(--mono);font-size:0.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
-.ftag{padding:4px 11px;border-radius:20px;font-size:0.7rem;font-weight:500;border:1px solid var(--bdr);background:var(--surf);color:var(--t2);cursor:pointer;transition:all 0.15s;font-family:var(--sans);}
+.flbl{font-family:var(--mono);font-size:0.57rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
+.ftag{padding:4px 10px;border-radius:20px;font-size:0.68rem;font-weight:500;border:1px solid var(--bdr);background:var(--surf);color:var(--t2);cursor:pointer;transition:all 0.15s;font-family:var(--sans);}
 .ftag:hover{border-color:var(--acc);color:var(--acc);}
 .ftag.on{background:var(--adim);border-color:var(--acc);color:var(--acc);}
 .ftag.fs.on{background:rgba(34,197,94,0.09);border-color:#22c55e;color:#86efac;}
@@ -74,50 +80,66 @@ main{max-width:1060px;margin:0 auto;padding:1.6rem 1.5rem 5rem;position:relative
 .ftag.fr.on{background:rgba(20,184,166,0.09);border-color:#14b8a6;color:#5eead4;}
 .ftag.fw.on{background:rgba(99,102,241,0.09);border-color:#6366f1;color:#a5b4fc;}
 .ftag.fre.on{background:rgba(59,130,246,0.09);border-color:#3b82f6;color:#93c5fd;}
-.rbtn{display:flex;align-items:center;gap:5px;padding:6px 14px;border-radius:8px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.75rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all 0.15s;white-space:nowrap;}
+.rbtn{display:flex;align-items:center;gap:5px;padding:6px 13px;border-radius:8px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.73rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all 0.15s;white-space:nowrap;}
 .rbtn:hover{border-color:var(--acc);color:var(--acc);}
 .rbtn:disabled{opacity:0.4;cursor:not-allowed;}
 .rbtn.spin svg{animation:spin 0.8s linear infinite;}
 @keyframes spin{to{transform:rotate(360deg)}}
-.stage-txt{font-family:var(--mono);font-size:0.63rem;color:var(--t3);margin-bottom:0.8rem;min-height:16px;}
+.stage-txt{font-family:var(--mono);font-size:0.61rem;color:var(--t3);margin-bottom:0.7rem;min-height:14px;}
 
-.sbox{display:flex;background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:0.9rem;}
+/* AE VIEW */
+.ae-header{padding:1rem 1.2rem;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;}
+.ae-info{display:flex;flex-direction:column;gap:3px;}
+.ae-name{font-family:var(--disp);font-size:1.1rem;font-weight:800;}
+.ae-meta{font-family:var(--mono);font-size:0.61rem;color:var(--t3);display:flex;gap:12px;flex-wrap:wrap;}
+.ae-meta em{color:var(--acc);font-style:normal;}
+.ae-search-btn{padding:8px 18px;border-radius:9px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:0.82rem;color:#060a12;transition:all 0.2s;white-space:nowrap;}
+.ae-search-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px var(--aglow);}
+.ae-search-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+
+.ae-company-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1rem;padding:10px 12px;background:var(--surf);border:1px solid var(--bdr);border-radius:9px;max-height:80px;overflow-y:auto;}
+.ae-chip{padding:2px 9px;border-radius:20px;font-size:0.62rem;border:1px solid var(--bdr2);background:var(--surf2);color:var(--t2);cursor:pointer;transition:all 0.15s;font-family:var(--mono);}
+.ae-chip:hover{border-color:var(--acc);color:var(--acc);}
+
+/* SEARCH */
+.sbox{display:flex;background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:0.8rem;}
 .sbox:focus-within{border-color:var(--acc);box-shadow:0 0 0 3px var(--adim);}
-.sinput{flex:1;padding:14px 18px;background:transparent;border:none;outline:none;color:var(--txt);font-size:0.95rem;font-family:var(--sans);}
+.sinput{flex:1;padding:13px 17px;background:transparent;border:none;outline:none;color:var(--txt);font-size:0.93rem;font-family:var(--sans);}
 .sinput::placeholder{color:var(--t3);}
-.sbtn{padding:10px 24px;margin:5px;border-radius:9px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:0.86rem;color:#060a12;display:flex;align-items:center;gap:6px;transition:all 0.2s;white-space:nowrap;}
+.sbtn{padding:9px 22px;margin:5px;border-radius:9px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:0.84rem;color:#060a12;display:flex;align-items:center;gap:6px;transition:all 0.2s;white-space:nowrap;}
 .sbtn:hover{transform:translateY(-1px);box-shadow:0 4px 18px var(--aglow);}
 .sbtn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
-.qrow{display:flex;flex-wrap:wrap;gap:6px;align-items:center;}
-.qlbl{font-family:var(--mono);font-size:0.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
-.qc{padding:4px 11px;border-radius:20px;border:1px solid var(--bdr);background:var(--surf);color:var(--t2);font-size:0.71rem;cursor:pointer;transition:all 0.15s;}
+.qrow{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
+.qlbl{font-family:var(--mono);font-size:0.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
+.qc{padding:3px 10px;border-radius:20px;border:1px solid var(--bdr);background:var(--surf);color:var(--t2);font-size:0.69rem;cursor:pointer;transition:all 0.15s;}
 .qc:hover{border-color:var(--acc);color:var(--acc);background:var(--adim);}
 
-.co-hdr{padding:1.1rem 1.3rem;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;margin-bottom:1.1rem;}
-.co-name{font-family:var(--disp);font-size:1.2rem;font-weight:800;margin-bottom:3px;}
-.co-stats{font-family:var(--mono);font-size:0.62rem;color:var(--t3);margin-bottom:8px;display:flex;gap:14px;flex-wrap:wrap;}
+/* CO HEADER */
+.co-hdr{padding:1rem 1.2rem;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;margin-bottom:1rem;}
+.co-name{font-family:var(--disp);font-size:1.15rem;font-weight:800;margin-bottom:3px;}
+.co-stats{font-family:var(--mono);font-size:0.6rem;color:var(--t3);margin-bottom:7px;display:flex;gap:12px;flex-wrap:wrap;}
 .co-stats em{color:var(--acc);font-style:normal;}
-.co-ctx{font-size:0.81rem;color:var(--t2);line-height:1.55;margin-bottom:10px;}
-.co-angle{padding:9px 13px;border-radius:7px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.18);border-left:3px solid var(--amber);}
-.albl{font-family:var(--mono);font-size:0.57rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:3px;}
-.atxt{font-size:0.79rem;color:#fde68a;line-height:1.5;}
+.co-ctx{font-size:0.8rem;color:var(--t2);line-height:1.55;margin-bottom:9px;}
+.co-angle{padding:8px 12px;border-radius:7px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.18);border-left:3px solid var(--amber);}
+.albl{font-family:var(--mono);font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:3px;}
+.atxt{font-size:0.78rem;color:#fde68a;line-height:1.5;}
 
-.stabs{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:9px;padding:3px;margin-bottom:1.1rem;}
-.stab{flex:1;padding:6px;border-radius:6px;border:none;background:transparent;color:var(--t2);font-size:0.78rem;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all 0.15s;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;}
+.stabs{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:9px;padding:3px;margin-bottom:1rem;}
+.stab{flex:1;padding:6px;border-radius:6px;border:none;background:transparent;color:var(--t2);font-size:0.76rem;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all 0.15s;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;}
 .stab.active{background:var(--surf3);color:var(--txt);border:1px solid var(--bdr2);}
-.scnt{padding:1px 6px;border-radius:20px;font-size:0.58rem;font-family:var(--mono);background:rgba(16,212,168,0.15);color:var(--acc);}
+.scnt{padding:1px 6px;border-radius:20px;font-size:0.57rem;font-family:var(--mono);background:rgba(16,212,168,0.15);color:var(--acc);}
 .scnt.b{background:rgba(59,130,246,0.15);color:#93c5fd;}
 
-.news-grid{display:flex;flex-direction:column;gap:0.9rem;}
-.card{background:var(--surf);border:1px solid var(--bdr);border-radius:13px;padding:1.2rem 1.4rem;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;animation:cardIn 0.3s ease both;}
+/* CARDS */
+.news-grid{display:flex;flex-direction:column;gap:0.85rem;}
+.card{background:var(--surf);border:1px solid var(--bdr);border-radius:12px;padding:1.1rem 1.3rem;transition:border-color 0.2s,transform 0.2s,box-shadow 0.2s;position:relative;overflow:hidden;animation:cardIn 0.3s ease both;}
 @keyframes cardIn{from{opacity:0;transform:translateY(7px)}to{opacity:1;transform:translateY(0)}}
-.card:hover{border-color:var(--bdr2);transform:translateY(-2px);box-shadow:0 5px 24px rgba(0,0,0,0.38);}
-.card.esg::before{content:'';position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--acc),#0891b2);border-radius:13px 0 0 13px;}
-.card.esg{padding-left:1.7rem;}
-
-.ctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.65rem;gap:0.8rem;}
+.card:hover{border-color:var(--bdr2);transform:translateY(-2px);box-shadow:0 5px 22px rgba(0,0,0,0.38);}
+.card.esg::before{content:"";position:absolute;top:0;left:0;bottom:0;width:3px;background:linear-gradient(180deg,var(--acc),#0891b2);border-radius:12px 0 0 12px;}
+.card.esg{padding-left:1.6rem;}
+.ctop{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:0.6rem;gap:0.8rem;}
 .ctags{display:flex;flex-wrap:wrap;gap:4px;}
-.tag{padding:2px 8px;border-radius:20px;font-size:0.6rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-family:var(--mono);}
+.tag{padding:2px 7px;border-radius:20px;font-size:0.59rem;font-weight:600;text-transform:uppercase;letter-spacing:0.05em;font-family:var(--mono);}
 .t-esg{background:rgba(16,212,168,0.11);color:var(--acc);border:1px solid rgba(16,212,168,0.22);}
 .t-sustainability{background:rgba(34,197,94,0.11);color:#86efac;border:1px solid rgba(34,197,94,0.22);}
 .t-impact{background:rgba(16,185,129,0.11);color:#6ee7b7;border:1px solid rgba(16,185,129,0.22);}
@@ -128,62 +150,56 @@ main{max-width:1060px;margin:0 auto;padding:1.6rem 1.5rem 5rem;position:relative
 .t-fund{background:rgba(239,68,68,0.11);color:#fca5a5;border:1px solid rgba(239,68,68,0.22);}
 .t-regulation{background:rgba(168,85,247,0.11);color:#d8b4fe;border:1px solid rgba(168,85,247,0.22);}
 .t-other{background:rgba(100,116,139,0.11);color:#94a3b8;border:1px solid rgba(100,116,139,0.22);}
-.cmeta{display:flex;align-items:center;gap:6px;flex-shrink:0;}
-.cco-pill{font-family:var(--mono);font-size:0.61rem;padding:2px 7px;border-radius:20px;background:rgba(59,130,246,0.09);color:#93c5fd;border:1px solid rgba(59,130,246,0.18);max-width:130px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
-
-.headline{font-family:var(--disp);font-weight:700;font-size:0.95rem;line-height:1.35;margin-bottom:0.5rem;}
+.cmeta{display:flex;align-items:center;gap:5px;flex-shrink:0;}
+.cco-pill{font-family:var(--mono);font-size:0.59rem;padding:2px 6px;border-radius:20px;background:rgba(59,130,246,0.09);color:#93c5fd;border:1px solid rgba(59,130,246,0.18);max-width:120px;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.headline{font-family:var(--disp);font-weight:700;font-size:0.93rem;line-height:1.35;margin-bottom:0.45rem;}
 .headline a{color:inherit;text-decoration:none;transition:color 0.15s;}
 .headline a:hover{color:var(--acc);}
-
-.src-block{display:flex;align-items:center;gap:8px;padding:7px 11px;margin-bottom:0.8rem;background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;flex-wrap:wrap;}
-.src-vdot{width:7px;height:7px;border-radius:50%;background:var(--acc);flex-shrink:0;}
-.src-name{font-family:var(--mono);font-size:0.69rem;color:var(--txt);font-weight:500;}
-.src-sep{color:var(--t3);font-size:0.7rem;}
-.src-date{font-family:var(--mono);font-size:0.64rem;color:var(--t3);}
+.src-block{display:flex;align-items:center;gap:7px;padding:6px 10px;margin-bottom:0.75rem;background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;flex-wrap:wrap;}
+.src-vdot{width:6px;height:6px;border-radius:50%;background:var(--acc);flex-shrink:0;}
+.src-name{font-family:var(--mono);font-size:0.67rem;color:var(--txt);font-weight:500;}
+.src-sep{color:var(--t3);}
+.src-date{font-family:var(--mono);font-size:0.62rem;color:var(--t3);}
 .src-sp{flex:1;}
-.src-real{font-family:var(--mono);font-size:0.57rem;padding:1px 7px;border-radius:20px;background:rgba(16,212,168,0.07);color:var(--acc);border:1px solid rgba(16,212,168,0.15);}
-.src-open{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:0.66rem;color:var(--acc);text-decoration:none;padding:3px 9px;border-radius:5px;border:1px solid rgba(16,212,168,0.2);background:var(--adim);transition:all 0.15s;flex-shrink:0;}
+.src-real{font-family:var(--mono);font-size:0.55rem;padding:1px 6px;border-radius:20px;background:rgba(16,212,168,0.07);color:var(--acc);border:1px solid rgba(16,212,168,0.15);}
+.src-open{display:flex;align-items:center;gap:3px;font-family:var(--mono);font-size:0.64rem;color:var(--acc);text-decoration:none;padding:2px 8px;border-radius:5px;border:1px solid rgba(16,212,168,0.2);background:var(--adim);transition:all 0.15s;flex-shrink:0;}
 .src-open:hover{background:rgba(16,212,168,0.16);border-color:var(--acc);}
-.src-gnews{display:flex;align-items:center;gap:4px;font-family:var(--mono);font-size:0.66rem;color:var(--t2);text-decoration:none;padding:3px 9px;border-radius:5px;border:1px solid var(--bdr);background:var(--surf);transition:all 0.15s;flex-shrink:0;}
+.src-gnews{display:flex;align-items:center;gap:3px;font-family:var(--mono);font-size:0.64rem;color:var(--t2);text-decoration:none;padding:2px 8px;border-radius:5px;border:1px solid var(--bdr);background:var(--surf);transition:all 0.15s;flex-shrink:0;}
 .src-gnews:hover{border-color:var(--bdr2);color:var(--txt);}
-
-.ai-wrap{margin-bottom:0.8rem;}
-.summary{font-size:0.8rem;color:var(--t2);line-height:1.58;margin-bottom:0.75rem;}
-.sigbox{background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;padding:8px 12px;border-left:3px solid var(--acc);}
-.siglbl{font-family:var(--mono);font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--acc);margin-bottom:3px;}
-.sigtxt{font-size:0.77rem;color:var(--t2);line-height:1.5;}
-
-.cfoot{display:flex;justify-content:flex-end;margin-top:0.75rem;}
-.obtn{padding:6px 13px;border-radius:7px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.72rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all 0.15s;display:flex;align-items:center;gap:5px;}
+.ai-wrap{margin-bottom:0.75rem;}
+.summary{font-size:0.79rem;color:var(--t2);line-height:1.56;margin-bottom:0.7rem;}
+.sigbox{background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;padding:8px 11px;border-left:3px solid var(--acc);}
+.siglbl{font-family:var(--mono);font-size:0.55rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--acc);margin-bottom:3px;}
+.sigtxt{font-size:0.76rem;color:var(--t2);line-height:1.5;}
+.cfoot{display:flex;justify-content:flex-end;margin-top:0.7rem;}
+.obtn{padding:5px 12px;border-radius:7px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.7rem;cursor:pointer;font-family:var(--sans);font-weight:500;transition:all 0.15s;display:flex;align-items:center;gap:4px;}
 .obtn:hover{border-color:var(--acc);color:var(--acc);background:var(--adim);}
 .obtn:disabled{opacity:0.5;cursor:not-allowed;}
-
-.opanel{display:none;margin-top:0.8rem;background:var(--surf2);border:1px solid rgba(16,212,168,0.18);border-radius:9px;padding:1rem;}
+.opanel{display:none;margin-top:0.75rem;background:var(--surf2);border:1px solid rgba(16,212,168,0.18);border-radius:9px;padding:0.9rem;}
 .opanel.open{display:block;animation:fadeIn 0.2s ease;}
 @keyframes fadeIn{from{opacity:0}to{opacity:1}}
-.ophead{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.6rem;}
-.oplbl{font-family:var(--mono);font-size:0.6rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--acc);}
-.copybtn{padding:3px 9px;border-radius:5px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.68rem;cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
+.ophead{display:flex;align-items:center;justify-content:space-between;margin-bottom:0.55rem;}
+.oplbl{font-family:var(--mono);font-size:0.58rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--acc);}
+.copybtn{padding:3px 9px;border-radius:5px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.67rem;cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
 .copybtn:hover{border-color:var(--acc);color:var(--acc);}
-.opsubj{font-family:var(--mono);font-size:0.62rem;color:var(--acc);margin-bottom:5px;}
-.optext{font-size:0.81rem;line-height:1.65;color:var(--txt);white-space:pre-wrap;}
-.opspin{display:flex;align-items:center;gap:7px;color:var(--t2);font-size:0.76rem;}
+.opsubj{font-family:var(--mono);font-size:0.6rem;color:var(--acc);margin-bottom:5px;}
+.optext{font-size:0.8rem;line-height:1.65;color:var(--txt);white-space:pre-wrap;}
+.opspin{display:flex;align-items:center;gap:7px;color:var(--t2);font-size:0.74rem;}
 .opspin svg{animation:spin 0.8s linear infinite;}
-
-.loader{display:flex;flex-direction:column;align-items:center;padding:3.5rem 2rem;gap:0.8rem;}
-.lring{width:42px;height:42px;border-radius:50%;border:3px solid var(--bdr2);border-top-color:var(--acc);animation:spin 0.8s linear infinite;}
-.ltxt{font-family:var(--mono);font-size:0.7rem;color:var(--t3);text-align:center;}
-.lsteps{margin-top:0.5rem;display:flex;flex-direction:column;gap:6px;min-width:300px;}
-.lstep{font-size:0.72rem;color:var(--t3);display:flex;align-items:center;gap:6px;transition:color 0.3s;}
+.loader{display:flex;flex-direction:column;align-items:center;padding:3rem 2rem;gap:0.7rem;}
+.lring{width:40px;height:40px;border-radius:50%;border:3px solid var(--bdr2);border-top-color:var(--acc);animation:spin 0.8s linear infinite;}
+.ltxt{font-family:var(--mono);font-size:0.68rem;color:var(--t3);text-align:center;}
+.lsteps{margin-top:0.4rem;display:flex;flex-direction:column;gap:5px;min-width:280px;}
+.lstep{font-size:0.7rem;color:var(--t3);display:flex;align-items:center;gap:5px;transition:color 0.3s;}
 .lstep.on{color:var(--t2);}.lstep.done{color:var(--acc);}
-.placeholder{text-align:center;padding:3.5rem 2rem;}
-.phi{font-size:2.2rem;opacity:0.15;margin-bottom:0.8rem;}
-.placeholder h3{font-family:var(--disp);font-size:1rem;color:var(--t2);margin-bottom:0.4rem;}
-.placeholder p{font-size:0.8rem;color:var(--t3);max-width:380px;margin:0 auto;line-height:1.6;}
-.nores{text-align:center;padding:2.5rem;background:var(--surf);border:1px dashed var(--bdr2);border-radius:13px;}
-.nores p{color:var(--t2);font-size:0.82rem;}
-.errbox{padding:1.1rem 1.3rem;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:9px;color:#fca5a5;font-size:0.81rem;line-height:1.7;}
-footer{text-align:center;padding:1.8rem;font-family:var(--mono);font-size:0.6rem;color:var(--t3);position:relative;z-index:1;border-top:1px solid var(--bdr);}
+.placeholder{text-align:center;padding:3rem 2rem;}
+.phi{font-size:2rem;opacity:0.15;margin-bottom:0.7rem;}
+.placeholder h3{font-family:var(--disp);font-size:0.95rem;color:var(--t2);margin-bottom:0.4rem;}
+.placeholder p{font-size:0.78rem;color:var(--t3);max-width:360px;margin:0 auto;line-height:1.6;}
+.nores{text-align:center;padding:2.2rem;background:var(--surf);border:1px dashed var(--bdr2);border-radius:12px;}
+.nores p{color:var(--t2);font-size:0.8rem;}
+.errbox{padding:1rem 1.2rem;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:9px;color:#fca5a5;font-size:0.79rem;line-height:1.7;}
+footer{text-align:center;padding:1.6rem;font-family:var(--mono);font-size:0.58rem;color:var(--t3);position:relative;z-index:1;border-top:1px solid var(--bdr);}
 </style>
 </head>
 <body>
@@ -191,40 +207,51 @@ footer{text-align:center;padding:1.8rem;font-family:var(--mono);font-size:0.6rem
 <div id="setup">
   <div class="setup-card">
     <div class="setup-logo"><div class="logo-mark">◈</div>ESG<em>Signal</em></div>
-    <p class="setup-sub">Real verified articles · AI analysis by Claude · No CORS extensions · Free</p>
+    <p class="setup-sub">Real verified articles · AI analysis by Claude · AE-personalised views · Free</p>
     <div class="setup-step">
       <div class="snum">1</div>
       <div class="sbody"><strong>Backend already deployed on Render</strong>Paste your Render URL below.<div class="free-b">✓ Free · No CORS · NewsAPI key hidden</div></div>
     </div>
-    <div class="setup-step" style="margin-bottom:1.3rem;">
+    <div class="setup-step" style="margin-bottom:1.2rem;">
       <div class="snum">2</div>
-      <div class="sbody"><strong>Claude AI is built-in — nothing else needed</strong>Summaries, sales signals and outreach emails run inside this page.<div class="free-b">✓ Free · No API key required</div></div>
+      <div class="sbody"><strong>Claude AI is built-in</strong>Summaries, sales signals and outreach emails are powered by Claude inside this page.<div class="free-b">✓ Free · No API key required</div></div>
     </div>
     <label class="inp-lbl">Your Render Backend URL</label>
-    <div class="inp-row">
-      <input class="setup-inp" id="proxyUrl" type="url" placeholder="https://esg-signal-proxy.onrender.com" autocomplete="off"/>
-    </div>
+    <input class="setup-inp" id="proxyUrl" type="url" placeholder="https://esg-signal-proxy.onrender.com" autocomplete="off"/>
     <button class="launch-btn" onclick="saveProxy()">Launch ESG Signal →</button>
-    <div class="setup-note">🔒 URL saved in your browser only. NewsAPI key stays on the server — never exposed.</div>
+    <div class="setup-note">🔒 URL saved in your browser only. NewsAPI key stays on the server.</div>
     <div class="setup-err" id="setupErr"></div>
   </div>
 </div>
 
 <header>
   <div class="logo"><div class="logo-mark">◈</div>ESG<em>Signal</em></div>
-  <div class="hbadge g" id="proxyStat"><div class="bdot g"></div>NewsAPI live</div>
-  <div class="hbadge g"><div class="bdot g"></div>Claude AI built-in</div>
+  <div class="hbadge g" id="proxyStat"><div class="bdot"></div>NewsAPI live</div>
+  <div class="hbadge g"><div class="bdot"></div>Claude AI built-in</div>
   <span id="timerTxt"></span>
   <button class="icon-btn" onclick="clearProxy()">⚙ Reset</button>
 </header>
 
 <main>
-  <div class="mtabs">
-    <button class="mtab active" id="t1" onclick="sw('feed')">◈ Latest ESG News <span class="mbadge" id="feedBadge">—</span></button>
-    <button class="mtab" id="t2" onclick="sw('search')">⌕ Search by Company <span class="mbadge b2">ICP Lookup</span></button>
+  <!-- TAB ROW 1: Feed + Search -->
+  <div class="main-tabs-wrap">
+    <div class="tab-row-1">
+      <button class="mtab active" id="t-feed" onclick="sw('feed')">◈ Latest ESG News <span class="mbadge" id="feedBadge">—</span></button>
+      <button class="mtab" id="t-search" onclick="sw('search')">⌕ Search by Company <span class="mbadge b2">ICP Lookup</span></button>
+    </div>
+    <!-- TAB ROW 2: AE tabs -->
+    <div class="tab-row-2">
+      <button class="mtab ae-tab" id="t-AE4"  onclick="sw('AE4')">AE4 <span class="mbadge bae">99</span></button>
+      <button class="mtab ae-tab" id="t-AE5"  onclick="sw('AE5')">AE5 <span class="mbadge bae">100</span></button>
+      <button class="mtab ae-tab" id="t-Dave" onclick="sw('Dave')">Dave <span class="mbadge bae">35</span></button>
+      <button class="mtab ae-tab" id="t-Jake" onclick="sw('Jake')">Jake <span class="mbadge bae">97</span></button>
+      <button class="mtab ae-tab" id="t-Jim"  onclick="sw('Jim')">Jim <span class="mbadge bae">98</span></button>
+      <button class="mtab ae-tab" id="t-Lucas" onclick="sw('Lucas')">Lucas <span class="mbadge bae">110</span></button>
+    </div>
   </div>
 
-  <div id="p1">
+  <!-- FEED -->
+  <div id="p-feed">
     <div class="rtrack"><div class="rfill" id="rfill" style="width:100%"></div></div>
     <div class="feed-ctrl">
       <div class="filters">
@@ -246,69 +273,108 @@ footer{text-align:center;padding:1.8rem;font-family:var(--mono);font-size:0.6rem
     <div id="fc"></div>
   </div>
 
-  <div id="p2" style="display:none">
-    <div style="margin-bottom:1.6rem;">
+  <!-- SEARCH -->
+  <div id="p-search" style="display:none">
+    <div style="margin-bottom:1.4rem;">
       <div class="sbox">
-        <input class="sinput" id="si" type="text" placeholder="Enter company — e.g. BlackRock, KKR, Amundi, Schroders…" autocomplete="off"/>
+        <input class="sinput" id="si" type="text" placeholder="Enter company — e.g. BlackRock, KKR, Amundi…" autocomplete="off"/>
         <button class="sbtn" id="sb" onclick="runSearch()">
-          <svg width="15" height="15" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search
+          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search
         </button>
       </div>
       <div class="qrow">
-        <span class="qlbl">From your 550:</span>
+        <span class="qlbl">Quick:</span>
         <span class="qc" onclick="qs('BlackRock')">BlackRock</span>
         <span class="qc" onclick="qs('KKR')">KKR</span>
         <span class="qc" onclick="qs('Amundi')">Amundi</span>
         <span class="qc" onclick="qs('Schroders')">Schroders</span>
         <span class="qc" onclick="qs('Tikehau Capital')">Tikehau Capital</span>
-        <span class="qc" onclick="qs('Bridgepoint')">Bridgepoint</span>
         <span class="qc" onclick="qs('Carlyle')">Carlyle</span>
         <span class="qc" onclick="qs('Partners Group')">Partners Group</span>
         <span class="qc" onclick="qs('ICG')">ICG</span>
         <span class="qc" onclick="qs('DWS')">DWS</span>
         <span class="qc" onclick="qs('Nuveen')">Nuveen</span>
-        <span class="qc" onclick="qs('Apollo Global')">Apollo</span>
-        <span class="qc" onclick="qs('Allianz GI')">Allianz GI</span>
-        <span class="qc" onclick="qs('Brookfield')">Brookfield</span>
       </div>
     </div>
-    <div id="sc">
-      <div class="placeholder"><div class="phi">⌕</div><h3>Search any company</h3><p>Real articles from 150,000+ verified sources — last 30 days. Claude classifies and generates a tailored sales signal for every article.</p></div>
-    </div>
+    <div id="sc"><div class="placeholder"><div class="phi">⌕</div><h3>Search any company</h3><p>Get ESG & sustainability news for any company from the last 30 days.</p></div></div>
   </div>
+
+  <!-- AE PANELS (one per AE) -->
+  <div id="p-AE4"  style="display:none"><div id="ae-AE4"></div></div>
+  <div id="p-AE5"  style="display:none"><div id="ae-AE5"></div></div>
+  <div id="p-Dave" style="display:none"><div id="ae-Dave"></div></div>
+  <div id="p-Jake" style="display:none"><div id="ae-Jake"></div></div>
+  <div id="p-Jim"  style="display:none"><div id="ae-Jim"></div></div>
+  <div id="p-Lucas" style="display:none"><div id="ae-Lucas"></div></div>
+
 </main>
-<footer>ESG Signal · Real articles via NewsAPI · Analysis by Claude (built-in) · 30-day rolling window · Always verify before outreach</footer>
+<footer>ESG Signal · Real articles via NewsAPI · Analysis by Claude (built-in) · 30-day window · Always verify before outreach</footer>
 
 <script>
 const CLAUDE_API = "https://api.anthropic.com/v1/messages";
-let PROXY_URL = '';
-let feedArticles = [], activeF = new Set(['esg','sustainability','impact','responsible','stewardship','research','other']);
-let coData = null, coSub = 'esg';
+let PROXY_URL = "";
+let feedArticles = [], activeF = new Set(["esg","sustainability","impact","responsible","stewardship","research","other"]);
+let coData = null, coSub = "esg";
 let refreshTimer = null, refreshCountdown = 1800;
 const REFRESH_SEC = 1800;
+let currentTab = "feed";
+let aeCache = {}; // cache AE search results
 
-// Feed queries — broad ESG topics, no quotes that restrict too much
+const AE_LISTS = {
+  "AE4": ["BlackRock", "Vanguard Group", "Fidelity Investments", "BNY Investments", "Invesco", "Franklin Templeton", "Prudential Financial", "T. Rowe Price Group", "Northern Trust", "Geode Capital Management", "Ameriprise Financial", "Charles Schwab Investment", "Blackstone", "Power Financial", "Federated Hermes", "Principal Financial", "New York Life Investments", "Dimensional Fund Advisors", "Affiliated Managers Group", "Allspring Global Investments", "MassMutual", "Neuberger Berman", "Voya Financial", "U.S. Bancorp", "Mercer", "Dodge & Cox", "SEI Investments", "Jackson Financial", "Russell Investments", "NISA Investment", "Lazard", "Fisher Investments", "Guggenheim Investments", "American Century", "Raymond James", "Conning", "Robert W. Baird", "TCW Group", "Mesirow", "Payden & Rygel", "Artisan Partners", "StepStone Group", "Massachusetts PRIM", "Minnesota State Board of Investment", "NYC Teachers Retirement System", "Connecticut Retirement Plans", "OPTrust", "Northern LGPS", "Greater Manchester Pension Fund", "London CIV", "AP1 (First AP Fund)", "Elo", "ERAFP", "Abu Dhabi Investment Authority (ADIA)", "Emirates Investment Authority", "Colleges of Applied Arts and Technology (CAAT)", "Fonds de solidarité FTQ", "BP Pension Fund", "Unilever UK Pension Fund", "Smart Pension", "Pensioenfonds Detailhandel", "Statens pensjonsfond Norge (GPFN)", "Ircantec", "Apicil Group", "KZVK (Kirchliche Zusatzversorgungskasse)", "Helvetia Sammelstiftung", "PKA", "Indiana Public Retirement System (INPRS)", "Utah Retirement Systems", "Oklahoma Teachers Retirement System", "Contra Costa County Employees Retirement Association (CCCERA)", "Texas Municipal Retirement System (TMRS)", "Pensioenfonds Huisartsen", "Topdanmark Pension", "Avanza Pension (Sweden)", "Debeka", "National Pensions Reserve Fund (NPRF successor)", "General Organization for Social Insurance (GOSI)", "Morgan Lewis", "Baker Botts", "Cravath Swaine & Moore", "Hunton Andrews Kurth", "Stephenson Harwood", "McCarthy Tetrault", "Hadef & Partners", "Khoshaim & Associates", "Freshfields Germany", "BSP (Bonn Steichen & Partners)", "South Pole", "Carbon Trust", "Frontier Economics", "Georgeson", "Drees & Sommer", "Bank of America", "First Abu Dhabi Bank", "National Bank of Canada", "Dubai Islamic Bank", "Nykredit", "KeyCorp"],
+  "AE5": ["PNC Financial", "Virtus Investment Partners", "Victory Capital", "CBRE Investment Management", "PRIMECAP", "Hightower Advisors", "Starwood Capital", "RhumbLine Advisers", "Acadian", "TPG", "Thoma Bravo", "Warburg Pincus", "Apollo Global Management", "Oaktree Capital Management", "Vista Equity Partners", "General Atlantic", "Leonard Green & Partners", "Apogem Capital Partners", "TA Associates", "Sixth Street", "Insight Partners", "Fortress Investment Group", "Oak Hill Advisors", "Andreessen Horowitz", "Cerberus Capital Management", "American Securities", "Tiger Global Management", "BSP-Alcentra", "BDT & MSD Partners", "L Catterton", "Stone Point Capital", "Crescent Capital Group", "Angelo Gordon", "PSG", "KPS Capital Partners", "Summit Partners", "The Jordan Company", "Churchill Asset Management", "Lightspeed Venture Partners", "TSG Consumer Partners", "Castlelake", "InterVest Capital Partners", "Farallon Capital Management", "Vista Credit Partners", "Citigroup", "Emirates NBD", "Mashreq Bank", "Bunq", "Helaba", "Systemiq", "Cambridge Econometrics", "FTI Consulting (ESG)", "I Care & Consult", "K&L Gates", "Arnold & Porter", "Cahill Gordon & Reindel", "Simmons & Simmons", "Mishcon de Reya", "DLA Piper", "Stikeman Elliott", "King & Spalding ME", "Houthoff", "Florida State Board of Administration", "North Carolina Retirement", "Colorado PERA", "Illinois Teachers Retirement", "Los Angeles City Employees Retirement", "Caisse de depot et placement (CDPQ)", "Brunel Pension Partnership", "West Midlands Pension Fund", "PMT (Metalektro)", "AP2 (Second AP Fund)", "FRR (Fonds de Reserve)", "Investment Corporation of Dubai (ICD)", "Abu Dhabi Investment Council (ADIC)", "Pennsylvania Public School Employees Retirement (PSERS)", "Ohio State Teachers Retirement System (STRS Ohio)", "Missouri State Employees Retirement System (MOSERS)", "Delaware Public Employees Retirement System", "Dallas Police and Fire Pension System", "Marin County Employees Retirement Association (MCERA)", "Public Employee Retirement System of Idaho (PERSI)", "Alberta Teachers Retirement Fund (ATRF)", "Fondaction (CSN)", "Rolls-Royce UK Pension Fund", "Pearson Pension Plan", "Cushon", "Pensioenfonds Zoetwaren", "Pensioenfonds Vliegverkeer (PFVV)", "PFA Pension", "Skandia (Sweden)", "Mandatum Life (Finland)", "CNAV (Caisse Nationale d'Assurance Vieillesse)", "Agrica", "HUK-Coburg", "EZVK (Evangelische Zusatzversorgungskasse)", "Swiss Life Sammelstiftung", "Irish Life Investment Managers (ILIM)", "Abu Dhabi Pension Fund (ADPF)", "ATP"],
+  "Dave": ["UBS", "Aegon Group", "Generali Group", "KKR", "Dai-ichi Life Holdings", "Ares Management", "MEAG", "Meiji Yasuda Life Insurance", "Aviva", "Samsung Group", "Banco Santander", "KBC Group", "Robeco Group", "WTW", "Talanx Group", "F Van Lanschot", "Storebrand Group", "Groupama Asset Management", "Advent International", "AXA IM ALTS", "Clearlake Capital Group", "Bain Capital", "Genstar Capital", "Barings", "New Mountain Capital", "Ardian", "HarbourVest Partners", "Astorg", "Antares Capital", "Hamilton Lane", "Eurazeo", "Värde Partners", "Morgan Stanley Investment Management", "Bregal Investments", "Park Square Capital"],
+  "Jake": ["Capital Group", "Allianz Group", "Amundi", "AXA Group", "Deutsche Bank", "Sumitomo Mitsui Trust Holdings", "HSBC Holdings", "Nippon Life Insurance", "Asset Management One", "LBBW", "M&G Investments", "TD Global Invest. Solutions", "Janus Henderson Group", "Swiss Life Asset Managers", "Zurcher Kantonalbank", "Zurich Financial Services", "St. James's Place", "Anima Holding Italy", "Royal London Group", "CVC Capital Partners", "OFI AM", "Caixabank", "Danske Bank", "Man Group", "Mn Services", "Partners Group", "ASR", "Bayerischen Landesbank", "OP Financial Group", "LGT Capital Partners", "EQT", "Nordic Capital", "Golub Capital", "Hayfin Capital Management", "Hillhouse Capital Group", "Accel-KKR", "AllianceBernstein", "Crestline Investors", "Tikehau Capital", "CVC Credit Partners", "Aberdeen Investments", "Lombard Odier Investment Mgmt", "AXA Investment Managers", "Wells Fargo", "Groupe BPCE / Natixis", "Saudi National Bank", "Truist Financial", "ASN Bank", "WSP Global", "Pollination", "2° Investing Initiative", "Alvarez & Marsal (ESG)", "Milbank", "Vedder Price", "Covington & Burling", "Gibson Dunn", "Taylor Wessing", "Clyde & Co", "Osler Hoskin & Harcourt", "Fasken", "August & Debouzy", "Elvinger Hoss Prussen", "Texas Teachers Retirement System", "Virginia Retirement System", "Michigan Retirement Systems", "Maryland State Retirement", "PSP Investments", "Borders to Coast Pension Partnership", "Strathclyde Pension Fund", "PME (Metaalindustrie)", "AP3 (Third AP Fund)", "Agirc-Arrco", "Hassana Investment (GOSI)", "Sanabil Investments (PIF sub)", "Tennessee Consolidated Retirement System", "Kansas Public Employees Retirement System (KPERS)", "Rhode Island Employees Retirement System", "Los Angeles Fire and Police Pensions (LAFPP)", "New York City Board of Education Retirement System (BERS)", "Wyoming Retirement System", "Municipal Employees Pension Plan (MEPP) Saskatchewan", "Pension Protection Fund (PPF)", "BT Pension Scheme (BTPS)", "National Grid UK Pension Scheme", "People's Partnership (The People's Pension)", "Pensioenfonds Horeca & Catering", "Stichting Pensioenfonds Openbaar Vervoer (SPOV)", "AP Pension", "Länsförsäkringar (Sweden)", "LocalTapiola (Finland)", "Préfon-Retraite", "DEVK Versicherungen", "Württembergische Versicherung (W&W Group)", "ASGA Pensionskasse", "Nest Sammelstiftung", "Davy Asset Management", "Public Pension Agency Saudi Arabia (PPA)"],
+  "Jim": ["State Street Global", "BNP Paribas", "Natixis Investment Managers", "Nuveen", "Brookfield Asset Management", "Manulife", "Mitsubishi UFJ Financial Group", "Macquarie Group", "Union Investment", "Intesa Sanpaolo", "Abrdn", "Zenkyoren", "Shinkin Central Bank", "Baillie Gifford", "Pictet Asset Management", "BMO Wealth Management", "Scotiabank", "SEB", "Resona Holdings", "Landesbank Hessen-Thuringen", "EFG International", "BBVA", "IFM Investors", "BCV", "Mirae Asset Financial Group", "Aon", "IDUNA Gruppe", "Goldman Sachs Asset Management", "HPS Investment Partners", "The Carlyle Group", "Clayton Dubilier & Rice", "Silver Lake", "Pacific Investment Management Company", "Permira Advisers", "Cinven", "Blue Owl Capital", "Bridgepoint", "Pemberton Asset Management", "PAG", "TCV", "MBK Partners", "Liontrust", "Sarasin & Partners", "Sycomore Asset Management", "DWS Group", "Toronto-Dominion Bank", "DZ Bank", "Al Rajhi Bank", "SpareBank 1", "Belfius", "Anthesis Group", "Quantis", "L.E.K. Consulting", "Charles River Associates", "Fried Frank", "Winston & Strawn", "Akin Gump", "Seward & Kissel", "Burges Salmon", "HFW (Holman Fenwick Willan)", "Blake Cassels & Graydon", "Gowling WLG", "Joffe & Associes", "Arendt & Medernach", "Wisconsin Investment Board", "Oregon Investment Council", "PSERS Pennsylvania", "Arizona State Retirement", "BT Pension Scheme", "ACCESS Pool", "Lothian Pension Fund", "bpfBOUW", "AP4 (Fourth AP Fund)", "Bayerische Versorgungskammer (BVK)", "Oman Investment Authority (OIA)", "Georgia Teachers Retirement System", "Montana Board of Investments", "Maine Public Employees Retirement System (MainePERS)", "San Diego City Employees Retirement System (SDCERS)", "Illinois Municipal Retirement Fund (IMRF)", "Vermont Pension Investment Committee (VPIC)", "Manitoba Teachers' Society Pension Plan", "National Employment Savings Trust (NEST)", "Sainsbury's Pension Scheme", "Centrica Pension Scheme", "NOW: Pensions", "Pensioenfonds Vervoer", "Kommunal Landspensjonskasse (KLP)", "Sampension", "Fjärde AP-fonden (AP4)", "Malakoff Humanis", "Pro BTP", "Signal Iduna", "Provinzial Rheinland", "Pensionskasse der Swisscom", "Ethos Foundation / Ethos Services", "Ethias", "Social Insurance Investment Portfolio (Bahrain)"],
+  "Lucas": ["J.P. Morgan Chase", "Legal & General Group", "Wellington Management", "Sun Life Financial", "Schroders", "Fidelity International", "Royal Bank of Canada", "Nomura Asset Management", "Credit Suisse", "Nordea", "Societe Generale", "Prudential", "Dekabank Group", "Sumitomo Life Insurance", "CIBC Asset Management", "Achmea", "Swedbank", "Union Bancaire Privee", "Vontobel Asset Management", "Credit Mutuel", "Sumitomo Mitsui Financial Group", "Rothschild", "Swiss Re", "KB Asset Management", "Svenska Handelsbanken", "Hg", "Intermediate Capital Group", "Hellman & Friedman", "PGIM Private Alternatives", "Francisco Partners", "GTCR", "Platinum Equity", "Adams Street Partners", "Arcmont Asset Management", "Veritas Capital", "Apax Partners", "GoldenTree Asset Management", "Thomas H. Lee Partners", "PAI Partners", "EIG", "Albacore Capital Group", "IK Partners", "Altor Equity Partners", "Carmignac", "Flossbach von Storch", "Bank of Nova Scotia", "KfW", "Abu Dhabi Commercial Bank", "Jyske Bank", "Fifth Third Bancorp", "DNV", "Vivid Economics (McKinsey)", "Morrow Sodali", "Strategy& (PwC)", "Cornerstone Research", "Schulte Roth & Zabel", "Vinson & Elkins", "Shearman & Sterling (A&O Shearman)", "Troutman Pepper", "Bird & Bird", "Reed Smith", "Bennett Jones", "Al Tamimi & Company", "Al Busaidy Mansoor Jamal", "Fidal", "Wildgen", "New Jersey Division of Investment", "Ohio Public Employees Retirement", "NYC Employees Retirement System", "Iowa Public Employees Retirement", "Investment Management Corp Ontario (IMCO)", "LGPS Central", "LGPS Wales (Wales Pension Partnership)", "London Pensions Fund Authority (LPFA)", "PFZW", "Keva", "Caisse des Dépôts", "VBL (Versorgungsanstalt)", "Mumtalakat (Bahrain)", "South Carolina Retirement System", "Nevada Public Employees Retirement System (NVPERS)", "New Hampshire Retirement System", "Sacramento County Employees' Retirement System (SCERS)", "Chicago Teachers Pension Fund (CTPF)", "CAAT Pension Plan", "Régime de retraite du personnel d'encadrement (RRPE)", "Shell Contributory Pension Fund", "Marks & Spencer Pension Scheme", "Tesco PLC Pension Scheme", "Scottish Widows Master Trust", "Pensioenfonds Medisch Specialisten", "Statens pensjonsfond utland (GPFG / Oil Fund)", "Lærernes Pension (LP)", "SPP Fonder", "AG2R La Mondiale", "Klesia", "R+V Versicherung", "Sparkassen-Versicherung", "Bâloise (Baloise Sammelstiftung)", "Ireland Strategic Investment Fund (ISIF)", "Integrale", "Goodwin Procter", "Squire Patton Boggs", "CMS Francis Lefebvre", "Kohlberg & Company", "MetLife Investment Management", "H.I.G. Capital", "Fiera Capital", "Desjardins Group", "Healthcare of Ontario Pension (HOOPP)"],
+};
+
 const FEED_QUERIES = [
-  'ESG investing finance 2025',
-  'sustainability fund investment 2025',
-  'responsible investment impact finance',
-  'stewardship shareholder engagement voting',
-  'net zero carbon climate investment fund',
-  'SFDR TCFD CSRD sustainable finance regulation',
-  'ESG chief sustainability officer appointed',
-  'green bond impact fund launch 2025',
+  '"new fund" OR "impact fund" OR "Article 8" OR "Article 9" ESG',
+  '"responsible investment" OR "sustainable investment" finance',
+  '"head of ESG" OR "chief sustainability" OR "sustainability director"',
+  '"net zero" OR "carbon neutral" investment fund',
+  '"SFDR" OR "TCFD" OR "CSRD" asset manager',
+  '"SDG" OR "stewardship" OR "shareholder engagement" investment',
+  '"ESG rating" OR "ESG score" OR "ESG report" financial',
+  '"green bond" OR "social bond" OR "sustainability bond"',
+  'sustainability "private equity" OR "asset management" OR "pension"',
+  '"responsible investment" OR "impact investing" 2025 2026',
 ];
 
-// ── SETUP ──
-function saveProxy(){
-  let url=document.getElementById('proxyUrl').value.trim().replace(/\/+$/,'');
-  const err=document.getElementById('setupErr');
-  if(!url||!url.startsWith('http')){err.textContent='Please enter a valid https:// URL';err.style.display='block';return;}
-  PROXY_URL=url;localStorage.setItem('esg_proxy_url',url);
-  document.getElementById('setup').style.display='none';init();
+const TOPIC_MAP = {
+  esg:[/\besg\b/,/environmental.social.gov/,/esg fund/,/esg invest/,/esg report/,/esg rating/,/esg score/],
+  sustainability:[/sustainab/,/green finance/,/climate risk/,/carbon neutral/,/net.zero/,/decarboni/,/climate action/],
+  impact:[/impact invest/,/impact fund/,/social impact/,/blended finance/],
+  responsible:[/responsible invest/,/responsible finance/,/\bpri\b/,/un sdg/,/\bsdg\b/,/socially responsible/],
+  stewardship:[/stewardship/,/shareholder engagement/,/proxy voting/,/activist/,/engagement campaign/],
+  research:[/esg research/,/sustainability report/,/annual report/,/climate report/,/esg survey/,/esg analysis/],
+  hire:[/appoint/,/hired/,/new.*head/,/chief sustainability/,/head of esg/,/sustainability director/],
+  fund:[/new fund/,/fund launch/,/fund raise/,/fundrais/,/closes.*fund/,/billion.*fund/],
+  regulation:[/\bsfdr\b/,/\btcfd\b/,/\bcsrd\b/,/article 8/,/article 9/,/taxonomy/,/disclosure regulat/],
+};
+const ESG_KW = [/\besg\b/,/sustainab/,/responsible invest/,/impact invest/,/stewardship/,/net.zero/,/carbon/,/climate finance/,/\bsfdr\b/,/\btcfd\b/,/\bcsrd\b/,/article [89]/,/\bpri\b/,/\bsdg\b/,/green bond/,/social bond/,/engagement/,/shareholder/,/esg rating/,/esg score/];
+
+function getTags(a){
+  const txt=((a.title||"")+(a.description||"")+(a.content||"")).toLowerCase();
+  const tags=[];
+  for(const[tag,pats]of Object.entries(TOPIC_MAP)){if(pats.some(p=>p.test(txt)))tags.push(tag);}
+  if(!tags.length)tags.push("other");
+  return tags;
 }
-function clearProxy(){if(!confirm('Reset backend URL?'))return;localStorage.removeItem('esg_proxy_url');location.reload();}
-function tryAutoLoad(){const u=localStorage.getItem('esg_proxy_url');if(u){PROXY_URL=u;document.getElementById('setup').style.display='none';init();}}
+function isESG(a){const txt=((a.title||"")+(a.description||"")).toLowerCase();return ESG_KW.some(p=>p.test(txt));}
+function fmtDate(iso){if(!iso)return"";try{return new Date(iso).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});}catch{return iso.split("T")[0];}}
+
+// SETUP
+function saveProxy(){
+  let url=document.getElementById("proxyUrl").value.trim().replace(/\/+$/,"");
+  const err=document.getElementById("setupErr");
+  if(!url||!url.startsWith("http")){err.textContent="Please enter a valid https:// URL";err.style.display="block";return;}
+  PROXY_URL=url;localStorage.setItem("esg_proxy_url",url);
+  document.getElementById("setup").style.display="none";init();
+}
+function clearProxy(){if(!confirm("Reset backend URL?"))return;localStorage.removeItem("esg_proxy_url");location.reload();}
+function tryAutoLoad(){const u=localStorage.getItem("esg_proxy_url");if(u){PROXY_URL=u;document.getElementById("setup").style.display="none";init();}}
 
 function init(){loadFeed();startTimer();}
 function startTimer(){
@@ -316,325 +382,322 @@ function startTimer(){
   refreshTimer=setInterval(()=>{
     refreshCountdown--;
     const m=Math.floor(refreshCountdown/60),s=refreshCountdown%60;
-    document.getElementById('timerTxt').textContent=`Auto-refresh in ${m}:${s.toString().padStart(2,'0')}`;
-    const pct=((REFRESH_SEC-refreshCountdown)/REFRESH_SEC)*100;
-    const f=document.getElementById('rfill');if(f)f.style.width=(100-pct)+'%';
+    document.getElementById("timerTxt").textContent=`Auto-refresh in ${m}:${s.toString().padStart(2,"0")}`;
+    const f=document.getElementById("rfill");if(f)f.style.width=((REFRESH_SEC-refreshCountdown)/REFRESH_SEC*100)+"%";
     if(refreshCountdown<=0){loadFeed();refreshCountdown=REFRESH_SEC;}
   },1000);
 }
 
-function sw(t){
-  document.getElementById('p1').style.display=t==='feed'?'':'none';
-  document.getElementById('p2').style.display=t==='search'?'':'none';
-  document.getElementById('t1').classList.toggle('active',t==='feed');
-  document.getElementById('t2').classList.toggle('active',t==='search');
+// TAB SWITCHING
+function sw(tab){
+  currentTab=tab;
+  const allPanels=["feed","search","AE4","AE5","Dave","Jake","Jim","Lucas"];
+  allPanels.forEach(p=>{const el=document.getElementById("p-"+p);if(el)el.style.display="none";});
+  const show=document.getElementById("p-"+tab);if(show)show.style.display="";
+  document.querySelectorAll(".mtab").forEach(b=>b.classList.remove("active"));
+  const active=document.getElementById("t-"+tab);if(active)active.classList.add("active");
+  // Load AE view if switching to AE tab and not loaded yet
+  if(["AE4","AE5","Dave","Jake","Jim","Lucas"].includes(tab)){
+    loadAEView(tab);
+  }
 }
+
 function tf(btn){
   const f=btn.dataset.f;
-  activeF.has(f)?(activeF.delete(f),btn.classList.remove('on')):(activeF.add(f),btn.classList.add('on'));
+  activeF.has(f)?(activeF.delete(f),btn.classList.remove("on")):(activeF.add(f),btn.classList.add("on"));
   renderFeed();
 }
 
-// ── NEWS FETCH ──
+// NEWS FETCH
 async function newsFetch(query,pageSize=10){
-  const from=new Date(Date.now()-30*24*60*60*1000).toISOString().split('T')[0];
+  const from=new Date(Date.now()-30*24*60*60*1000).toISOString().split("T")[0];
   const params=new URLSearchParams({q:query,pageSize,from});
   const r=await fetch(`${PROXY_URL}/news?${params}`);
   const d=await r.json();
   if(d.error)throw new Error(d.error);
-  return(d.articles||[]).filter(a=>a.title&&a.title!=='[Removed]'&&a.url);
+  return(d.articles||[]).filter(a=>a.title&&a.title!=="[Removed]"&&a.url);
 }
+function dedup(articles){const seen=new Set();return articles.filter(a=>{const k=a.url||a.title;if(seen.has(k))return false;seen.add(k);return true;});}
+function enforce30(articles){const c=Date.now()-30*24*60*60*1000;return articles.filter(a=>a.publishedAt&&new Date(a.publishedAt).getTime()>c);}
 
-function dedup(articles){
-  const seen=new Set();
-  return articles.filter(a=>{const k=a.url||a.title;if(seen.has(k))return false;seen.add(k);return true;});
-}
-function enforce30(articles){
-  const cutoff=Date.now()-30*24*60*60*1000;
-  return articles.filter(a=>a.publishedAt&&new Date(a.publishedAt).getTime()>cutoff);
-}
-
-// KEY FIX: classify based on title + description text
-function getTopicTags(a){
-  const txt=((a.title||'')+'|'+(a.description||'')+'|'+(a.content||'')).toLowerCase();
-  const tags=[];
-  if(/\besg\b|environmental.social.gov|esg fund|esg invest|esg report|esg rating|esg score|esg risk|esg data|esg framework|esg policy/.test(txt)) tags.push('esg');
-  if(/sustainab|green finance|climate risk|carbon neutral|net.zero|decarboni|climate action|paris agreement|scope [123]|ghg emission/.test(txt)) tags.push('sustainability');
-  if(/impact invest|impact fund|social impact|blended finance|impact bond|development finance|impact report/.test(txt)) tags.push('impact');
-  if(/responsible invest|responsible finance|\bpri\b|un sdg|\bsdg\b|socially responsible|sri fund|ethical invest/.test(txt)) tags.push('responsible');
-  if(/stewardship|shareholder engagement|proxy voting|activist|engagement campaign|shareholder resolution|say.on.pay/.test(txt)) tags.push('stewardship');
-  if(/esg research|sustainability report|annual report|climate report|white paper|esg survey|esg analysis|esg study/.test(txt)) tags.push('research');
-  if(/appoint|hired|new.*head|chief sustainability|head of esg|sustainability director|cso |chief.*esg/.test(txt)) tags.push('hire');
-  if(/new fund|fund launch|fund raise|fundrais|closes.*fund|billion.*fund|fund.*billion|raises.*billion/.test(txt)) tags.push('fund');
-  if(/\bsfdr\b|\btcfd\b|\bcsrd\b|article 8|article 9|sustainable finance regulation|taxonomy|disclosure regulat/.test(txt)) tags.push('regulation');
-  // If none matched, mark as other
-  if(tags.length===0) tags.push('other');
-  return tags;
-}
-
-function isESGArticle(a){
-  const tags=getTopicTags(a);
-  return tags.some(t=>['esg','sustainability','impact','responsible','stewardship','research','hire','fund','regulation'].includes(t));
-}
-
-function fmtDate(iso){
-  if(!iso)return'';
-  try{return new Date(iso).toLocaleDateString('en-GB',{day:'numeric',month:'short',year:'numeric'});}catch{return iso.split('T')[0];}
-}
-
-// ── CLAUDE ANALYSIS ──
+// CLAUDE
 async function claudeAnalyse(articles){
   const results={};
   for(let i=0;i<articles.length;i+=6){
     const batch=articles.slice(i,i+6);
-    const prompt=batch.map((a,idx)=>`[${idx}] Title: ${a.title}\nSource: ${a.source?.name||'Unknown'}\nDate: ${a.publishedAt}\nDescription: ${a.description||'N/A'}`).join('\n\n');
+    const prompt=batch.map((a,idx)=>`[${idx}] Title: ${a.title}\nSource: ${a.source?.name||"?"}\nDate: ${a.publishedAt}\nDesc: ${a.description||"N/A"}`).join("\n\n");
     try{
-      const r=await fetch(CLAUDE_API,{
-        method:'POST',headers:{'Content-Type':'application/json'},
-        body:JSON.stringify({
-          model:'claude-sonnet-4-20250514',max_tokens:2000,
-          system:`You are an ESG sales intelligence analyst. For each article return a JSON array (index 0 to ${batch.length-1}):
-[{"summary":"2 clear sentences summarising the news","sales_signal":"1-2 sentences: what pain point does this reveal and what should a salesperson say when reaching out to sell ESG/sustainability reporting software?","tags":["1-3 from: esg,sustainability,impact,responsible,stewardship,research,hire,fund,regulation,other"],"relevance":"high|medium|low"}]
-ONLY the JSON array. No markdown. No extra text.`,
-          messages:[{role:'user',content:prompt}]
-        })
-      });
-      if(!r.ok)throw new Error(`Claude ${r.status}`);
+      const r=await fetch(CLAUDE_API,{method:"POST",headers:{"Content-Type":"application/json"},
+        body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:2000,
+          system:`ESG sales analyst. Return JSON array (index 0-${batch.length-1}):[{"summary":"2 sentences","sales_signal":"1-2 sentences: pain point + what to say selling ESG software","tags":["1-3 from: esg,sustainability,impact,responsible,stewardship,research,hire,fund,regulation,other"],"relevance":"high|medium|low"}] ONLY the JSON array.`,
+          messages:[{role:"user",content:prompt}]})});
       const d=await r.json();
-      const txt=(d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim();
-      const clean=txt.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
+      const txt=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("").trim();
+      const clean=txt.replace(/```json\n?/g,"").replace(/```\n?/g,"").trim();
       const arr=JSON.parse(clean);
       batch.forEach((a,idx)=>{if(arr[idx])results[a.url||a.title]=arr[idx];});
-    }catch(e){
-      batch.forEach(a=>{results[a.url||a.title]={summary:'',sales_signal:'',tags:getTopicTags(a),relevance:'medium'};});
-    }
+    }catch(e){batch.forEach(a=>{results[a.url||a.title]={summary:"",sales_signal:"",tags:getTags(a),relevance:"medium"};});}
   }
   return results;
 }
 
 async function claudeContext(company,headlines){
   try{
-    const r=await fetch(CLAUDE_API,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:400,
-        messages:[{role:'user',content:`Recent headlines about ${company}:\n${headlines||'(none found)'}\n\nProvide:\n1. 2-sentence summary of ${company}'s current ESG posture\n2. Single best outreach angle for selling ESG data/reporting software RIGHT NOW\n\nReturn ONLY JSON: {"context":"...","outreach_angle":"..."}`}]
-      })
-    });
+    const r=await fetch(CLAUDE_API,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:350,
+        messages:[{role:"user",content:`Headlines about ${company}:\n${headlines||"(none)"}\n\n1. 2-sentence ESG posture summary for ${company}\n2. Best outreach angle selling ESG data software NOW\n\nReturn ONLY JSON: {"context":"...","outreach_angle":"..."}`}]})});
     const d=await r.json();
-    const txt=(d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim();
-    const clean=txt.replace(/```json\n?/g,'').replace(/```\n?/g,'').trim();
-    return JSON.parse(clean.slice(clean.indexOf('{'),clean.lastIndexOf('}')+1));
-  }catch{return{context:'',outreach_angle:''};}
+    const txt=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("").trim();
+    const clean=txt.replace(/```json\n?/g,"").replace(/```\n?/g,"").trim();
+    return JSON.parse(clean.slice(clean.indexOf("{"),clean.lastIndexOf("}")+1));
+  }catch{return{context:"",outreach_angle:""};}
 }
 
-// ── FEED ──
+// FEED
 async function loadFeed(){
-  const btn=document.getElementById('rfb');
-  btn.disabled=true;btn.classList.add('spin');setStage('');
-  document.getElementById('fc').innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching verified ESG news…</div><div class="lsteps"><div class="lstep on" id="ls1">⟳ Querying news proxy across ESG topics…</div><div class="lstep" id="ls2">⟳ Deduplicating &amp; enforcing 30-day window…</div><div class="lstep" id="ls3">⟳ Claude AI analysing &amp; writing sales signals…</div><div class="lstep" id="ls4">⟳ Rendering feed…</div></div></div>`;
+  const btn=document.getElementById("rfb");btn.disabled=true;btn.classList.add("spin");setStage("");
+  document.getElementById("fc").innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching ESG news…</div><div class="lsteps"><div class="lstep on" id="ls1">⟳ Querying news across ESG topics…</div><div class="lstep" id="ls2">⟳ Deduplicating &amp; enforcing 30-day window…</div><div class="lstep" id="ls3">⟳ Claude AI analysing &amp; writing sales signals…</div><div class="lstep" id="ls4">⟳ Rendering feed…</div></div></div>`;
   try{
-    lsDone(1);setStage('Fetching from NewsAPI…');
+    lsDone(1);setStage("Fetching…");
     const batches=await Promise.all(FEED_QUERIES.map(q=>newsFetch(q,8).catch(()=>[])));
     let raw=dedup(enforce30(batches.flat()));
     raw.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
     raw=raw.slice(0,40);
-    lsDone(2);setStage(`${raw.length} articles found — Claude AI analysing…`);
+    lsDone(2);setStage(`${raw.length} articles — analysing…`);
     lsDone(3);
     const analysis=await claudeAnalyse(raw);
     feedArticles=raw.map(a=>{
       const ai=analysis[a.url||a.title]||{};
-      // Merge Claude tags with our local classifier — ensures something always shows
-      const localTags=getTopicTags(a);
-      const claudeTags=ai.tags||[];
-      const mergedTags=[...new Set([...claudeTags,...localTags])];
-      return{...a,_ai:{...ai,tags:mergedTags},_tags:mergedTags};
+      const local=getTags(a);
+      return{...a,_ai:{...ai,tags:[...new Set([...(ai.tags||[]),...local])]},_tags:[...new Set([...(ai.tags||[]),...local])]};
     });
-    const ro={high:0,medium:1,low:2};
-    feedArticles.sort((a,b)=>{
-      const rd=(ro[a._ai.relevance]||1)-(ro[b._ai.relevance]||1);
-      return rd!==0?rd:new Date(b.publishedAt)-new Date(a.publishedAt);
-    });
+    feedArticles.sort((a,b)=>({high:0,medium:1,low:2}[a._ai.relevance]||1)-({high:0,medium:1,low:2}[b._ai.relevance]||1)||new Date(b.publishedAt)-new Date(a.publishedAt));
     lsDone(4);
-    document.getElementById('feedBadge').textContent=feedArticles.length;
-    document.getElementById('proxyStat').innerHTML=`<div class="bdot g"></div>${feedArticles.length} articles · ${new Date().toLocaleTimeString()}`;
-    setStage('');renderFeed();startTimer();
+    document.getElementById("feedBadge").textContent=feedArticles.length;
+    document.getElementById("proxyStat").innerHTML=`<div class="bdot"></div>${feedArticles.length} articles · ${new Date().toLocaleTimeString()}`;
+    setStage("");renderFeed();startTimer();
   }catch(e){
-    document.getElementById('fc').innerHTML=`<div class="errbox">⚠ <strong>Error:</strong> ${h(e.message)}<br><br>If your Render backend is sleeping (free tier), wait 30 seconds and click Refresh.</div>`;
-    setStage('');
+    document.getElementById("fc").innerHTML=`<div class="errbox">⚠ ${h(e.message)}<br><br>If Render is sleeping, wait 30 seconds and click Refresh.</div>`;
+    setStage("");
   }
-  btn.disabled=false;btn.classList.remove('spin');
+  btn.disabled=false;btn.classList.remove("spin");
 }
-
-function lsDone(n){const el=document.getElementById('ls'+n);if(el)el.classList.add('done');}
-function setStage(t){const el=document.getElementById('stageTxt');if(el){el.textContent=t;el.style.display=t?'block':'none';}}
-
+function lsDone(n){const el=document.getElementById("ls"+n);if(el)el.classList.add("done");}
+function setStage(t){const el=document.getElementById("stageTxt");if(el){el.textContent=t;el.style.display=t?"block":"none";}}
 function renderFeed(){
-  // Show ALL articles — filter by merged tags
   const items=feedArticles.filter(a=>(a._tags||[]).some(t=>activeF.has(t)));
-  const el=document.getElementById('fc');
-  if(!items.length){
-    el.innerHTML=`<div class="nores"><p>No articles match the selected filters. Try enabling the "Other" filter to see all fetched articles.</p></div>`;return;
-  }
-  el.innerHTML=`<div class="news-grid">${items.map((a,i)=>cardHtml(a,i,'feed')).join('')}</div>`;
+  const el=document.getElementById("fc");
+  if(!items.length){el.innerHTML=`<div class="nores"><p>No articles match selected filters. Try enabling "Other".</p></div>`;return;}
+  el.innerHTML=`<div class="news-grid">${items.map((a,i)=>cardHtml(a,i,"feed")).join("")}</div>`;
 }
 
-// ── SEARCH ──
-function qs(n){document.getElementById('si').value=n;sw('search');runSearch();}
-document.addEventListener('DOMContentLoaded',()=>{
-  document.getElementById('si').addEventListener('keydown',e=>{if(e.key==='Enter')runSearch();});
+// AE VIEW
+async function loadAEView(ae){
+  const container=document.getElementById("ae-"+ae);
+  if(!container)return;
+  // If already loaded and cached, just re-render
+  if(aeCache[ae]){renderAEResults(ae,aeCache[ae]);return;}
+
+  const companies=AE_LISTS[ae]||[];
+  container.innerHTML=`
+    <div class="ae-header">
+      <div class="ae-info">
+        <div class="ae-name">${ae}'s Accounts</div>
+        <div class="ae-meta"><span>Companies: <em>${companies.length}</em></span><span>Window: <em>last 30 days</em></span><span>Source: <em>NewsAPI</em></span></div>
+      </div>
+      <button class="ae-search-btn" id="ae-btn-${ae}" onclick="searchAENews('${ae}')">
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+        Load ${ae}'s News
+      </button>
+    </div>
+    <div class="ae-company-chips">${companies.map(c=>`<span class="ae-chip" onclick="swSearch('${c.replace(/'/g,"\\'")}\')">${c}</span>`).join("")}</div>
+    <div id="ae-results-${ae}">
+      <div class="placeholder"><div class="phi">◈</div><h3>Click "Load ${ae}'s News"</h3><p>Searches NewsAPI for ESG & sustainability news about all ${companies.length} of ${ae}'s assigned companies in the last 30 days.</p></div>
+    </div>`;
+}
+
+async function searchAENews(ae){
+  const companies=AE_LISTS[ae]||[];
+  const btn=document.getElementById("ae-btn-"+ae);
+  const resultsEl=document.getElementById("ae-results-"+ae);
+  if(!btn||!resultsEl)return;
+  btn.disabled=true;btn.textContent="Searching…";
+  resultsEl.innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Searching ESG news for ${ae}'s ${companies.length} companies…</div><div class="lsteps"><div class="lstep on">⟳ Fetching news from NewsAPI…</div><div class="lstep">⟳ Filtering for ESG relevance…</div><div class="lstep">⟳ Claude AI analysis…</div></div></div>`;
+
+  try{
+    // Search using top companies (most recognisable names) to stay within API limits
+    // Use first 10 most prominent companies for the query
+    const topCos=companies.slice(0,12);
+    const queryStr=topCos.map(c=>c.split(" ")[0]).filter(w=>w.length>3).slice(0,8).join(" OR ");
+    const query=`(${queryStr}) AND (ESG OR sustainability OR "responsible investment" OR "impact fund" OR "net zero")`;
+
+    const raw=dedup(enforce30(await newsFetch(query,20).catch(()=>[])));
+    raw.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
+
+    // Filter: only articles mentioning AE's companies
+    const relevant=raw.filter(a=>{
+      const txt=((a.title||"")+(a.description||"")).toLowerCase();
+      return companies.some(co=>txt.includes(co.toLowerCase())||txt.includes(co.split(" ")[0].toLowerCase()));
+    });
+
+    const analysis=await claudeAnalyse(relevant);
+    const results=relevant.map(a=>{
+      const ai=analysis[a.url||a.title]||{};
+      const matchedCo=companies.find(co=>{
+        const txt=((a.title||"")+(a.description||"")).toLowerCase();
+        return txt.includes(co.toLowerCase())||txt.includes(co.split(" ")[0].toLowerCase());
+      })||"";
+      return{...a,_ai:{...ai,tags:[...new Set([...(ai.tags||[]),...getTags(a)])]},_tags:[...new Set([...(ai.tags||[]),...getTags(a)])],_matchedCo:matchedCo};
+    });
+
+    aeCache[ae]=results;
+    renderAEResults(ae,results);
+  }catch(e){
+    resultsEl.innerHTML=`<div class="errbox">⚠ ${h(e.message)}</div>`;
+  }
+  btn.disabled=false;btn.textContent=`↻ Refresh ${ae}'s News`;
+}
+
+function renderAEResults(ae,results){
+  const el=document.getElementById("ae-results-"+ae);if(!el)return;
+  if(!results.length){
+    el.innerHTML=`<div class="nores"><p>No ESG news found for ${ae}'s companies in the last 30 days. Try clicking a company chip above to search individually.</p></div>`;
+    return;
+  }
+  el.innerHTML=`<div style="font-family:var(--mono);font-size:0.65rem;color:var(--acc);margin-bottom:0.8rem;">Found ${results.length} ESG articles across ${ae}'s accounts</div><div class="news-grid">${results.map((a,i)=>cardHtml(a,i,"ae-"+ae,true)).join("")}</div>`;
+}
+
+function swSearch(company){sw("search");document.getElementById("si").value=company;runSearch();}
+
+// COMPANY SEARCH
+function qs(n){document.getElementById("si").value=n;sw("search");runSearch();}
+document.addEventListener("DOMContentLoaded",()=>{
+  document.getElementById("si").addEventListener("keydown",e=>{if(e.key==="Enter")runSearch();});
   tryAutoLoad();
 });
-
 async function runSearch(){
-  const q=document.getElementById('si').value.trim();if(!q)return;
-  sw('search');document.getElementById('sb').disabled=true;coData=null;coSub='esg';
-  document.getElementById('sc').innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching news for "${h(q)}"…</div><div class="lsteps"><div class="lstep on" id="cs1">⟳ Searching NewsAPI — last 30 days…</div><div class="lstep" id="cs2">⟳ Classifying ESG vs general news…</div><div class="lstep" id="cs3">⟳ Claude AI generating sales signals…</div><div class="lstep" id="cs4">⟳ Building outreach context…</div></div></div>`;
+  const q=document.getElementById("si").value.trim();if(!q)return;
+  sw("search");document.getElementById("sb").disabled=true;coData=null;coSub="esg";
+  document.getElementById("sc").innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching news for "${h(q)}"…</div><div class="lsteps"><div class="lstep on" id="cs1">⟳ Searching NewsAPI…</div><div class="lstep" id="cs2">⟳ Classifying ESG vs general…</div><div class="lstep" id="cs3">⟳ Claude AI analysis…</div><div class="lstep" id="cs4">⟳ Building outreach context…</div></div></div>`;
   try{
-    // Better search: company name + broad terms (not over-restricted)
-    const[esgRaw,genRaw]=await Promise.all([
-      newsFetch(`${q} ESG sustainability climate investment`,15),
-      newsFetch(q,10),
-    ]);
-    csStep(1);
+    const[esgRaw,genRaw]=await Promise.all([newsFetch(`"${q}" ESG sustainability responsible investment`,15),newsFetch(q,10)]);
+    for(let i=1;i<=2;i++){const el=document.getElementById("cs"+i);if(el)el.classList.add("done");}
     const all=dedup(enforce30([...esgRaw,...genRaw]));
     all.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
-    // Use local classifier — more reliable than query-based classification
-    const esgA=all.filter(a=>isESGArticle(a));
-    const othA=all.filter(a=>!isESGArticle(a));
-    csStep(2);
+    const esgA=all.filter(a=>isESG(a));
+    const othA=all.filter(a=>!isESG(a));
     const analysis=await claudeAnalyse(all);
-    csStep(3);
-    const headlines=esgA.slice(0,5).map(a=>a.title).join('\n');
-    const context=await claudeContext(q,headlines);
-    csStep(4);
+    for(let i=3;i<=3;i++){const el=document.getElementById("cs"+i);if(el)el.classList.add("done");}
+    const context=await claudeContext(q,esgA.slice(0,5).map(a=>a.title).join("\n"));
+    for(let i=4;i<=4;i++){const el=document.getElementById("cs"+i);if(el)el.classList.add("done");}
     coData={
-      company:q,
-      esg:esgA.map(a=>{const ai=analysis[a.url||a.title]||{};return{...a,_ai:{...ai,tags:[...new Set([...(ai.tags||[]),...getTopicTags(a)])]},_tags:getTopicTags(a)};}).sort((a,b)=>({high:0,medium:1,low:2}[a._ai?.relevance]||1)-({high:0,medium:1,low:2}[b._ai?.relevance]||1)),
-      other:othA.map(a=>{const ai=analysis[a.url||a.title]||{};return{...a,_ai:ai,_tags:['other']};}).sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt)),
-      context,
+      company:q,context,
+      esg:esgA.map(a=>{const ai=analysis[a.url||a.title]||{};return{...a,_ai:{...ai,tags:[...new Set([...(ai.tags||[]),...getTags(a)])]},_tags:getTags(a)};}).sort((a,b)=>({high:0,medium:1,low:2}[a._ai?.relevance]||1)-({high:0,medium:1,low:2}[b._ai?.relevance]||1)),
+      other:othA.map(a=>{const ai=analysis[a.url||a.title]||{};return{...a,_ai:ai,_tags:["other"]};}).sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt)),
     };
-    coSub='esg';renderCoResults();
-  }catch(e){
-    document.getElementById('sc').innerHTML=`<div class="errbox">⚠ ${h(e.message)}</div>`;
-  }
-  document.getElementById('sb').disabled=false;
+    coSub="esg";renderCoResults();
+  }catch(e){document.getElementById("sc").innerHTML=`<div class="errbox">⚠ ${h(e.message)}</div>`;}
+  document.getElementById("sb").disabled=false;
 }
-function csStep(n){for(let i=1;i<=n;i++){const el=document.getElementById('cs'+i);if(el)el.classList.add(i<n?'done':'on');}}
-
 function renderCoResults(){
   if(!coData)return;
   const d=coData;
-  document.getElementById('sc').innerHTML=`
+  document.getElementById("sc").innerHTML=`
     <div class="co-hdr">
       <div class="co-name">${h(d.company)}</div>
-      <div class="co-stats"><span>ESG articles: <em>${d.esg.length}</em></span><span>Other news: <em>${d.other.length}</em></span><span>Window: <em>last 30 days</em></span><span>Source: <em>NewsAPI (verified)</em></span></div>
-      ${d.context?.context?`<div class="co-ctx">${h(d.context.context)}</div>`:''}
-      ${d.context?.outreach_angle?`<div class="co-angle"><div class="albl">⚡ Best Outreach Angle Right Now</div><div class="atxt">${h(d.context.outreach_angle)}</div></div>`:''}
+      <div class="co-stats"><span>ESG: <em>${d.esg.length}</em></span><span>Other: <em>${d.other.length}</em></span><span>Window: <em>last 30 days</em></span></div>
+      ${d.context?.context?`<div class="co-ctx">${h(d.context.context)}</div>`:""}
+      ${d.context?.outreach_angle?`<div class="co-angle"><div class="albl">⚡ Best Outreach Angle</div><div class="atxt">${h(d.context.outreach_angle)}</div></div>`:""}
     </div>
     <div class="stabs">
-      <button class="stab active" id="st1" onclick="sst('esg',this)">◈ ESG & Sustainability <span class="scnt">${d.esg.length}</span></button>
-      <button class="stab" id="st2" onclick="sst('other',this)">○ Other News <span class="scnt b">${d.other.length}</span></button>
+      <button class="stab active" id="st1" onclick="sst(\'esg\',this)">◈ ESG & Sustainability <span class="scnt">${d.esg.length}</span></button>
+      <button class="stab" id="st2" onclick="sst(\'other\',this)">○ Other News <span class="scnt b">${d.other.length}</span></button>
     </div>
     <div id="cc"></div>`;
-  renderSubTab('esg');
+  renderSubTab("esg");
 }
-function sst(t,btn){coSub=t;document.querySelectorAll('.stab').forEach(b=>b.classList.remove('active'));btn.classList.add('active');renderSubTab(t);}
+function sst(t,btn){coSub=t;document.querySelectorAll(".stab").forEach(b=>b.classList.remove("active"));btn.classList.add("active");renderSubTab(t);}
 function renderSubTab(t){
-  const items=(t==='esg'?coData.esg:coData.other)||[];
-  const el=document.getElementById('cc');if(!el)return;
-  if(!items.length){
-    const msg=t==='esg'
-      ?`No ESG news found for ${h(coData.company)} in the last 30 days. This may mean they've been quiet on ESG — worth noting in your outreach.`
-      :'No other company news found in the last 30 days.';
-    el.innerHTML=`<div class="nores"><p>${msg}</p></div>`;return;
-  }
-  el.innerHTML=`<div class="news-grid">${items.map((a,i)=>cardHtml(a,i,'co-'+t)).join('')}</div>`;
+  const items=(t==="esg"?coData.esg:coData.other)||[];
+  const el=document.getElementById("cc");if(!el)return;
+  if(!items.length){el.innerHTML=`<div class="nores"><p>${t==="esg"?`No ESG news for ${h(coData.company)} in last 30 days.`:"No other news found."}</p></div>`;return;}
+  el.innerHTML=`<div class="news-grid">${items.map((a,i)=>cardHtml(a,i,"co-"+t)).join("")}</div>`;
 }
 
-// ── CARD ──
-function cardHtml(article,i,ns){
-  const isESG=ns==='feed'||ns==='co-esg';
-  const tags=[...new Set(article._tags||['other'])].slice(0,3);
-  const tagsHtml=tags.map(t=>`<span class="tag t-${t}">${t}</span>`).join('');
+// CARD
+function cardHtml(article,i,ns,showCo=false){
+  const isESGCard=ns==="feed"||ns==="co-esg"||ns.startsWith("ae-");
+  const tags=[...new Set(article._tags||["other"])].slice(0,3);
+  const tagsHtml=tags.map(t=>`<span class="tag t-${t}">${t}</span>`).join("");
   const ai=article._ai||{};
-  const srcName=article.source?.name||'Unknown Source';
-  const pubDate=fmtDate(article.publishedAt);
+  const srcName=article.source?.name||"Unknown";
   const url=article.url||null;
-  const gnews=`https://news.google.com/search?q=${encodeURIComponent(article.title||'')}`;
+  const gnews=`https://news.google.com/search?q=${encodeURIComponent(article.title||"")}`;
+  const matchedCo=article._matchedCo||"";
   return`
-  <div class="card ${isESG?'esg':''}" style="animation-delay:${Math.min(i,15)*0.04}s">
+  <div class="card ${isESGCard?"esg":""}" style="animation-delay:${Math.min(i,15)*0.04}s">
     <div class="ctop">
-      <div class="ctags">${tagsHtml}</div>
-      <div class="cmeta">${ns==='feed'?`<span class="cco-pill">${h(srcName)}</span>`:''}</div>
+      <div class="ctags">
+        ${matchedCo?`<span class="tag" style="background:rgba(16,212,168,0.15);color:var(--acc);border:1px solid rgba(16,212,168,0.3);">🏢 ${h(matchedCo)}</span>`:""}
+        ${tagsHtml}
+      </div>
+      <div class="cmeta">${ns==="feed"?`<span class="cco-pill">${h(srcName)}</span>`:""}</div>
     </div>
-    <div class="headline">${url?`<a href="${h(url)}" target="_blank" rel="noopener">${h(article.title||'Untitled')}</a>`:h(article.title||'Untitled')}</div>
+    <div class="headline">${url?`<a href="${h(url)}" target="_blank" rel="noopener">${h(article.title||"Untitled")}</a>`:h(article.title||"Untitled")}</div>
     <div class="src-block">
       <div class="src-vdot"></div>
       <span class="src-name">${h(srcName)}</span>
       <span class="src-sep">·</span>
-      <span class="src-date">${pubDate}</span>
+      <span class="src-date">${fmtDate(article.publishedAt)}</span>
       <span class="src-sp"></span>
       <span class="src-real">✓ Verified</span>
       ${url?`<a class="src-open" href="${h(url)}" target="_blank" rel="noopener">↗ Open</a>`:`<a class="src-gnews" href="${gnews}" target="_blank" rel="noopener">⌕ Google</a>`}
     </div>
     <div class="ai-wrap">
-      ${ai.summary
-        ?`<div class="summary">${h(ai.summary)}</div>${ai.sales_signal?`<div class="sigbox"><div class="siglbl">Sales Signal</div><div class="sigtxt">${h(ai.sales_signal)}</div></div>`:''}`
-        :`<div style="font-size:0.75rem;color:var(--t3);font-family:var(--mono);padding:6px 0;">AI analysis not available for this article</div>`
-      }
+      ${ai.summary?`<div class="summary">${h(ai.summary)}</div>${ai.sales_signal?`<div class="sigbox"><div class="siglbl">Sales Signal</div><div class="sigtxt">${h(ai.sales_signal)}</div></div>`:""}`:`<div style="font-size:0.72rem;color:var(--t3);font-family:var(--mono);padding:4px 0;">AI analysis unavailable</div>`}
     </div>
     <div class="cfoot">
       <button class="obtn" onclick="draftOutreach('${ns}',${i},this)">
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Draft Outreach Email
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Draft Outreach
       </button>
     </div>
     <div class="opanel" id="op-${ns}-${i}"></div>
   </div>`;
 }
 
-// ── OUTREACH ──
+// OUTREACH
 async function draftOutreach(ns,i,btn){
   const pid=`op-${ns}-${i}`;const panel=document.getElementById(pid);if(!panel)return;
-  if(panel.classList.contains('open')){panel.classList.remove('open');return;}
+  if(panel.classList.contains("open")){panel.classList.remove("open");return;}
   let article;
-  if(ns==='feed'){const vis=feedArticles.filter(a=>(a._tags||[]).some(t=>activeF.has(t)));article=vis[i];}
-  else if(ns==='co-esg')article=(coData?.esg||[])[i];
-  else article=(coData?.other||[])[i];
+  if(ns==="feed"){const vis=feedArticles.filter(a=>(a._tags||[]).some(t=>activeF.has(t)));article=vis[i];}
+  else if(ns==="co-esg")article=(coData?.esg||[])[i];
+  else if(ns==="co-other")article=(coData?.other||[])[i];
+  else if(ns.startsWith("ae-")){const ae=ns.replace("ae-","");article=(aeCache[ae]||[])[i];}
+  else article=feedArticles[i];
   if(!article)return;
-  const company=coData?.company||article.source?.name||'the company';
-  panel.classList.add('open');
-  panel.innerHTML=`<div class="opspin"><svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Drafting email…</div>`;
+  const company=coData?.company||article._matchedCo||article.source?.name||"the company";
+  panel.classList.add("open");
+  panel.innerHTML=`<div class="opspin"><svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Drafting email…</div>`;
   btn.disabled=true;
   try{
-    const r=await fetch(CLAUDE_API,{
-      method:'POST',headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({
-        model:'claude-sonnet-4-20250514',max_tokens:600,
-        messages:[{role:'user',content:`Write a B2B cold outreach email for selling ESG/sustainability reporting software.
-Target: ${company}
-News: ${article.title}
-Summary: ${article._ai?.summary||article.description||''}
-Sales signal: ${article._ai?.sales_signal||''}
-Source: ${article.source?.name||''} (${fmtDate(article.publishedAt)})
-Rules: MAX 5 sentences. Open by referencing this specific news. Connect to a pain point (ESG reporting burden, regulatory pressure, investor scrutiny). One soft CTA. Warm, professional, not pushy. Do NOT name any product.
-Format: Line 1 = subject only. Blank line. Email body. Nothing else.`}]
-      })
-    });
+    const r=await fetch(CLAUDE_API,{method:"POST",headers:{"Content-Type":"application/json"},
+      body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:550,
+        messages:[{role:"user",content:`B2B cold outreach email for ESG/sustainability reporting software.\nTarget: ${company}\nNews: ${article.title}\nSummary: ${article._ai?.summary||article.description||""}\nSales signal: ${article._ai?.sales_signal||""}\nSource: ${article.source?.name||""} (${fmtDate(article.publishedAt)})\n\nRules: MAX 5 sentences. Reference the news. Connect to ESG pain point. Soft CTA. Warm, professional. No product name.\nFormat: Line 1=subject only. Blank line. Email body. Nothing else.`}]})});
     const d=await r.json();
-    const txt=(d.content||[]).filter(b=>b.type==='text').map(b=>b.text).join('').trim();
-    const lines=txt.split('\n');
-    const subj=lines[0].replace(/^Subject:\s*/i,'');
-    const body=lines.slice(lines[1]===''?2:1).join('\n').trim();
-    panel.innerHTML=`<div class="ophead"><div class="oplbl">✦ Outreach — based on verified news</div><button class="copybtn" onclick="cp(\`${ej(txt)}\`)">Copy</button></div><div class="opsubj">SUBJECT: ${h(subj)}</div><div class="optext">${h(body)}</div>`;
-  }catch(e){panel.innerHTML=`<div style="color:#fca5a5;font-size:0.8rem;">Failed. ${h(e.message)}</div>`;}
+    const txt=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("").trim();
+    const lines=txt.split("\n");
+    const subj=lines[0].replace(/^Subject:\s*/i,"");
+    const body=lines.slice(lines[1]===""?2:1).join("\n").trim();
+    panel.innerHTML=`<div class="ophead"><div class="oplbl">✦ Outreach — verified news</div><button class="copybtn" onclick="cp(\`${ej(txt)}\`)">Copy</button></div><div class="opsubj">SUBJECT: ${h(subj)}</div><div class="optext">${h(body)}</div>`;
+  }catch(e){panel.innerHTML=`<div style="color:#fca5a5;font-size:0.78rem;">Failed. ${h(e.message)}</div>`;}
   btn.disabled=false;
 }
 
-function cp(t){navigator.clipboard.writeText(t).then(()=>{document.querySelectorAll('.copybtn').forEach(b=>{if(b.textContent==='Copy'){b.textContent='Copied!';setTimeout(()=>b.textContent='Copy',2000);}});});}
-function h(s){if(!s)return'';return String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');}
-function ej(s){if(!s)return'';return String(s).replace(/\\/g,'\\\\').replace(/`/g,'\\`').replace(/\$/g,'\\$');}
+function cp(t){navigator.clipboard.writeText(t).then(()=>{document.querySelectorAll(".copybtn").forEach(b=>{if(b.textContent==="Copy"){b.textContent="Copied!";setTimeout(()=>b.textContent="Copy",2000);}});});}
+function h(s){if(!s)return"";return String(s).replace(/&/g,"&amp;").replace(/</g,"&lt;").replace(/>/g,"&gt;").replace(/"/g,"&quot;");}
+function ej(s){if(!s)return"";return String(s).replace(/\\/g,"\\\\").replace(/`/g,"\\`").replace(/\$/g,"\\$");}
 </script>
 </body>
 </html>
