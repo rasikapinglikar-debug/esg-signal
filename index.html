@@ -10,7 +10,7 @@
   --bg:#060a12;--surf:#0d1421;--surf2:#111c2e;--surf3:#162236;
   --bdr:#1e3048;--bdr2:#253d5e;
   --acc:#10d4a8;--adim:rgba(16,212,168,0.1);--aglow:rgba(16,212,168,0.22);
-  --amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;
+  --amber:#f59e0b;--red:#ef4444;--blue:#3b82f6;--purple:#8b5cf6;
   --txt:#dde4ef;--t2:#8ba0bc;--t3:#4d6a8a;
   --mono:"IBM Plex Mono",monospace;--sans:"Figtree",sans-serif;--disp:"Syne",sans-serif;
 }
@@ -53,22 +53,18 @@ header{position:sticky;top:0;z-index:300;display:flex;align-items:center;gap:0.8
 
 main{max-width:1080px;margin:0 auto;padding:1.4rem 1.5rem 5rem;position:relative;z-index:1;}
 
-/* MAIN TABS — now includes AE tabs */
-.main-tabs-wrap{margin-bottom:1.4rem;}
-.tab-row-1{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;padding:3px;margin-bottom:6px;}
-.tab-row-2{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;padding:3px;}
+/* TABS */
+.tabs-wrap{margin-bottom:1.4rem;}
+.tab-row{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;padding:3px;margin-bottom:6px;}
 .mtab{flex:1;padding:8px 6px;border-radius:8px;border:none;background:transparent;color:var(--t2);font-size:0.78rem;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all 0.15s;display:flex;align-items:center;justify-content:center;gap:5px;white-space:nowrap;}
 .mtab.active{background:var(--surf3);color:var(--txt);border:1px solid var(--bdr2);}
-.mtab.ae-tab.active{background:rgba(59,130,246,0.12);border-color:var(--blue);color:#93c5fd;}
+.mtab.ae-tab.active{background:rgba(59,130,246,0.1);border-color:var(--blue);color:#93c5fd;}
 .mbadge{padding:1px 6px;border-radius:20px;font-size:0.58rem;font-family:var(--mono);background:rgba(16,212,168,0.15);color:var(--acc);}
 .mbadge.b2{background:rgba(59,130,246,0.15);color:#93c5fd;}
-.mbadge.bae{background:rgba(59,130,246,0.15);color:#93c5fd;}
 
-/* REFRESH BAR */
+/* FEED */
 .rtrack{height:2px;background:var(--bdr);border-radius:2px;margin-bottom:1.1rem;overflow:hidden;}
 .rfill{height:100%;background:linear-gradient(90deg,var(--acc),#0891b2);border-radius:2px;transition:width 1s linear;}
-
-/* FEED CONTROLS */
 .feed-ctrl{display:flex;align-items:center;justify-content:space-between;margin-bottom:1rem;flex-wrap:wrap;gap:0.7rem;}
 .filters{display:flex;gap:5px;flex-wrap:wrap;align-items:center;}
 .flbl{font-family:var(--mono);font-size:0.57rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
@@ -87,7 +83,40 @@ main{max-width:1080px;margin:0 auto;padding:1.4rem 1.5rem 5rem;position:relative
 @keyframes spin{to{transform:rotate(360deg)}}
 .stage-txt{font-family:var(--mono);font-size:0.61rem;color:var(--t3);margin-bottom:0.7rem;min-height:14px;}
 
-/* AE VIEW */
+/* SEARCH */
+.sbox{display:flex;background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:0.8rem;}
+.sbox:focus-within{border-color:var(--acc);box-shadow:0 0 0 3px var(--adim);}
+.sinput{flex:1;padding:13px 17px;background:transparent;border:none;outline:none;color:var(--txt);font-size:0.93rem;font-family:var(--sans);}
+.sinput::placeholder{color:var(--t3);}
+.sbtn{padding:9px 22px;margin:5px;border-radius:9px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:0.84rem;color:#060a12;display:flex;align-items:center;gap:6px;transition:all 0.2s;white-space:nowrap;}
+.sbtn:hover{transform:translateY(-1px);box-shadow:0 4px 18px var(--aglow);}
+.sbtn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
+.qrow{display:flex;flex-wrap:wrap;gap:5px;align-items:center;margin-bottom:0;}
+.qlbl{font-family:var(--mono);font-size:0.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
+.qc{padding:3px 10px;border-radius:20px;border:1px solid var(--bdr);background:var(--surf);color:var(--t2);font-size:0.69rem;cursor:pointer;transition:all 0.15s;}
+.qc:hover{border-color:var(--acc);color:var(--acc);background:var(--adim);}
+
+/* RECENT + HOT SECTIONS */
+.side-sections{display:grid;grid-template-columns:1fr 1fr;gap:1rem;margin-bottom:1.2rem;}
+.side-box{background:var(--surf);border:1px solid var(--bdr);border-radius:11px;padding:1rem;}
+.side-title{font-family:var(--mono);font-size:0.62rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--t3);margin-bottom:0.7rem;display:flex;align-items:center;gap:6px;}
+.side-title .sticon{font-size:0.75rem;}
+.recent-list{display:flex;flex-direction:column;gap:5px;}
+.recent-item{display:flex;align-items:center;justify-content:space-between;padding:6px 10px;background:var(--surf2);border:1px solid var(--bdr);border-radius:7px;cursor:pointer;transition:all 0.15s;gap:8px;}
+.recent-item:hover{border-color:var(--acc);background:var(--adim);}
+.recent-name{font-size:0.78rem;color:var(--txt);font-weight:500;flex:1;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+.recent-time{font-family:var(--mono);font-size:0.6rem;color:var(--t3);flex-shrink:0;}
+.recent-empty{font-size:0.75rem;color:var(--t3);font-style:italic;padding:4px 2px;}
+
+/* HOT companies */
+.hot-list{display:flex;flex-wrap:wrap;gap:6px;}
+.hot-chip{display:flex;align-items:center;gap:5px;padding:4px 10px;border-radius:20px;background:rgba(239,68,68,0.08);border:1px solid rgba(239,68,68,0.2);color:#fca5a5;font-size:0.72rem;cursor:pointer;transition:all 0.15s;font-family:var(--sans);}
+.hot-chip:hover{background:rgba(239,68,68,0.15);border-color:rgba(239,68,68,0.4);}
+.hot-chip .remove-hot{color:rgba(239,68,68,0.5);font-size:0.75rem;margin-left:2px;line-height:1;}
+.hot-chip .remove-hot:hover{color:var(--red);}
+.hot-empty{font-size:0.75rem;color:var(--t3);font-style:italic;padding:4px 2px;}
+
+/* AE PANEL */
 .ae-header{padding:1rem 1.2rem;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;margin-bottom:1rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:0.8rem;}
 .ae-info{display:flex;flex-direction:column;gap:3px;}
 .ae-name{font-family:var(--disp);font-size:1.1rem;font-weight:800;}
@@ -97,32 +126,35 @@ main{max-width:1080px;margin:0 auto;padding:1.4rem 1.5rem 5rem;position:relative
 .ae-search-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px var(--aglow);}
 .ae-search-btn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
 
-.ae-company-chips{display:flex;flex-wrap:wrap;gap:5px;margin-bottom:1rem;padding:10px 12px;background:var(--surf);border:1px solid var(--bdr);border-radius:9px;max-height:80px;overflow-y:auto;}
-.ae-chip{padding:2px 9px;border-radius:20px;font-size:0.62rem;border:1px solid var(--bdr2);background:var(--surf2);color:var(--t2);cursor:pointer;transition:all 0.15s;font-family:var(--mono);}
+/* AE Company chips with hot flag */
+.ae-chips-wrap{background:var(--surf);border:1px solid var(--bdr);border-radius:9px;padding:10px 12px;margin-bottom:1rem;}
+.ae-chips-header{display:flex;align-items:center;justify-content:space-between;margin-bottom:8px;}
+.ae-chips-label{font-family:var(--mono);font-size:0.6rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
+.ae-chips-hint{font-size:0.68rem;color:var(--t3);}
+.ae-chips{display:flex;flex-wrap:wrap;gap:5px;max-height:100px;overflow-y:auto;}
+.ae-chip{display:flex;align-items:center;gap:4px;padding:3px 9px;border-radius:20px;font-size:0.65rem;border:1px solid var(--bdr2);background:var(--surf2);color:var(--t2);cursor:pointer;transition:all 0.15s;font-family:var(--sans);}
 .ae-chip:hover{border-color:var(--acc);color:var(--acc);}
-
-/* SEARCH */
-.sbox{display:flex;background:var(--surf);border:1px solid var(--bdr2);border-radius:12px;overflow:hidden;transition:border-color 0.2s,box-shadow 0.2s;margin-bottom:0.8rem;}
-.sbox:focus-within{border-color:var(--acc);box-shadow:0 0 0 3px var(--adim);}
-.sinput{flex:1;padding:13px 17px;background:transparent;border:none;outline:none;color:var(--txt);font-size:0.93rem;font-family:var(--sans);}
-.sinput::placeholder{color:var(--t3);}
-.sbtn{padding:9px 22px;margin:5px;border-radius:9px;background:linear-gradient(135deg,var(--acc),#0891b2);border:none;cursor:pointer;font-family:var(--disp);font-weight:700;font-size:0.84rem;color:#060a12;display:flex;align-items:center;gap:6px;transition:all 0.2s;white-space:nowrap;}
-.sbtn:hover{transform:translateY(-1px);box-shadow:0 4px 18px var(--aglow);}
-.sbtn:disabled{opacity:0.5;cursor:not-allowed;transform:none;}
-.qrow{display:flex;flex-wrap:wrap;gap:5px;align-items:center;}
-.qlbl{font-family:var(--mono);font-size:0.58rem;color:var(--t3);text-transform:uppercase;letter-spacing:0.1em;}
-.qc{padding:3px 10px;border-radius:20px;border:1px solid var(--bdr);background:var(--surf);color:var(--t2);font-size:0.69rem;cursor:pointer;transition:all 0.15s;}
-.qc:hover{border-color:var(--acc);color:var(--acc);background:var(--adim);}
+.ae-chip.is-hot{background:rgba(239,68,68,0.08);border-color:rgba(239,68,68,0.25);color:#fca5a5;}
+.ae-chip .flag-btn{font-size:0.65rem;opacity:0.5;margin-left:2px;line-height:1;transition:opacity 0.15s;}
+.ae-chip:hover .flag-btn{opacity:1;}
+.ae-chip.is-hot .flag-btn{opacity:1;color:var(--red);}
 
 /* CO HEADER */
 .co-hdr{padding:1rem 1.2rem;background:var(--surf);border:1px solid var(--bdr);border-radius:11px;margin-bottom:1rem;}
-.co-name{font-family:var(--disp);font-size:1.15rem;font-weight:800;margin-bottom:3px;}
+.co-name{font-family:var(--disp);font-size:1.15rem;font-weight:800;margin-bottom:3px;display:flex;align-items:center;gap:10px;}
+.co-hot-badge{padding:2px 9px;border-radius:20px;background:rgba(239,68,68,0.1);border:1px solid rgba(239,68,68,0.25);color:#fca5a5;font-size:0.62rem;font-family:var(--mono);}
 .co-stats{font-family:var(--mono);font-size:0.6rem;color:var(--t3);margin-bottom:7px;display:flex;gap:12px;flex-wrap:wrap;}
 .co-stats em{color:var(--acc);font-style:normal;}
 .co-ctx{font-size:0.8rem;color:var(--t2);line-height:1.55;margin-bottom:9px;}
 .co-angle{padding:8px 12px;border-radius:7px;background:rgba(245,158,11,0.06);border:1px solid rgba(245,158,11,0.18);border-left:3px solid var(--amber);}
 .albl{font-family:var(--mono);font-size:0.56rem;text-transform:uppercase;letter-spacing:0.1em;color:var(--amber);margin-bottom:3px;}
 .atxt{font-size:0.78rem;color:#fde68a;line-height:1.5;}
+.co-actions{display:flex;gap:8px;margin-top:10px;}
+.co-action-btn{padding:5px 13px;border-radius:7px;border:1px solid var(--bdr2);background:transparent;color:var(--t2);font-size:0.72rem;cursor:pointer;font-family:var(--sans);transition:all 0.15s;}
+.co-action-btn:hover{border-color:var(--acc);color:var(--acc);background:var(--adim);}
+.co-action-btn.hot-btn{border-color:rgba(239,68,68,0.3);color:#fca5a5;background:rgba(239,68,68,0.06);}
+.co-action-btn.hot-btn:hover{border-color:var(--red);background:rgba(239,68,68,0.12);}
+.co-action-btn.hot-btn.is-hot{background:rgba(239,68,68,0.12);border-color:var(--red);color:var(--red);}
 
 .stabs{display:flex;gap:2px;background:var(--surf);border:1px solid var(--bdr);border-radius:9px;padding:3px;margin-bottom:1rem;}
 .stab{flex:1;padding:6px;border-radius:6px;border:none;background:transparent;color:var(--t2);font-size:0.76rem;font-weight:500;cursor:pointer;font-family:var(--sans);transition:all 0.15s;text-align:center;display:flex;align-items:center;justify-content:center;gap:5px;}
@@ -199,6 +231,7 @@ main{max-width:1080px;margin:0 auto;padding:1.4rem 1.5rem 5rem;position:relative
 .nores{text-align:center;padding:2.2rem;background:var(--surf);border:1px dashed var(--bdr2);border-radius:12px;}
 .nores p{color:var(--t2);font-size:0.8rem;}
 .errbox{padding:1rem 1.2rem;background:rgba(239,68,68,0.05);border:1px solid rgba(239,68,68,0.18);border-radius:9px;color:#fca5a5;font-size:0.79rem;line-height:1.7;}
+@media(max-width:640px){.side-sections{grid-template-columns:1fr;}}
 footer{text-align:center;padding:1.6rem;font-family:var(--mono);font-size:0.58rem;color:var(--t3);position:relative;z-index:1;border-top:1px solid var(--bdr);}
 </style>
 </head>
@@ -207,19 +240,19 @@ footer{text-align:center;padding:1.6rem;font-family:var(--mono);font-size:0.58re
 <div id="setup">
   <div class="setup-card">
     <div class="setup-logo"><div class="logo-mark">◈</div>ESG<em>Signal</em></div>
-    <p class="setup-sub">Real verified articles · AI analysis by Claude · AE-personalised views · Free</p>
+    <p class="setup-sub">Real verified articles · AI analysis · AE-personalised views · Recent history · Hot flags</p>
     <div class="setup-step">
       <div class="snum">1</div>
-      <div class="sbody"><strong>Backend already deployed on Render</strong>Paste your Render URL below.<div class="free-b">✓ Free · No CORS · NewsAPI key hidden</div></div>
+      <div class="sbody"><strong>Backend already on Render</strong>Paste your Render URL.<div class="free-b">✓ Free · No CORS</div></div>
     </div>
     <div class="setup-step" style="margin-bottom:1.2rem;">
       <div class="snum">2</div>
-      <div class="sbody"><strong>Claude AI is built-in</strong>Summaries, sales signals and outreach emails are powered by Claude inside this page.<div class="free-b">✓ Free · No API key required</div></div>
+      <div class="sbody"><strong>Claude AI built-in</strong>Summaries, signals and outreach emails run inside this page.<div class="free-b">✓ Free · No key needed</div></div>
     </div>
-    <label class="inp-lbl">Your Render Backend URL</label>
+    <label class="inp-lbl">Render Backend URL</label>
     <input class="setup-inp" id="proxyUrl" type="url" placeholder="https://esg-signal-proxy.onrender.com" autocomplete="off"/>
     <button class="launch-btn" onclick="saveProxy()">Launch ESG Signal →</button>
-    <div class="setup-note">🔒 URL saved in your browser only. NewsAPI key stays on the server.</div>
+    <div class="setup-note">🔒 URL saved in your browser only.</div>
     <div class="setup-err" id="setupErr"></div>
   </div>
 </div>
@@ -233,20 +266,18 @@ footer{text-align:center;padding:1.6rem;font-family:var(--mono);font-size:0.58re
 </header>
 
 <main>
-  <!-- TAB ROW 1: Feed + Search -->
-  <div class="main-tabs-wrap">
-    <div class="tab-row-1">
+  <div class="tabs-wrap">
+    <div class="tab-row">
       <button class="mtab active" id="t-feed" onclick="sw('feed')">◈ Latest ESG News <span class="mbadge" id="feedBadge">—</span></button>
       <button class="mtab" id="t-search" onclick="sw('search')">⌕ Search by Company <span class="mbadge b2">ICP Lookup</span></button>
     </div>
-    <!-- TAB ROW 2: AE tabs -->
-    <div class="tab-row-2">
-      <button class="mtab ae-tab" id="t-AE4"  onclick="sw('AE4')">AE4 <span class="mbadge bae">99</span></button>
-      <button class="mtab ae-tab" id="t-AE5"  onclick="sw('AE5')">AE5 <span class="mbadge bae">100</span></button>
-      <button class="mtab ae-tab" id="t-Dave" onclick="sw('Dave')">Dave <span class="mbadge bae">35</span></button>
-      <button class="mtab ae-tab" id="t-Jake" onclick="sw('Jake')">Jake <span class="mbadge bae">97</span></button>
-      <button class="mtab ae-tab" id="t-Jim"  onclick="sw('Jim')">Jim <span class="mbadge bae">98</span></button>
-      <button class="mtab ae-tab" id="t-Lucas" onclick="sw('Lucas')">Lucas <span class="mbadge bae">110</span></button>
+    <div class="tab-row">
+      <button class="mtab ae-tab" id="t-AE4"  onclick="sw('AE4')">AE4 <span class="mbadge b2">99</span></button>
+      <button class="mtab ae-tab" id="t-AE5"  onclick="sw('AE5')">AE5 <span class="mbadge b2">100</span></button>
+      <button class="mtab ae-tab" id="t-Dave" onclick="sw('Dave')">Dave <span class="mbadge b2">35</span></button>
+      <button class="mtab ae-tab" id="t-Jake" onclick="sw('Jake')">Jake <span class="mbadge b2">97</span></button>
+      <button class="mtab ae-tab" id="t-Jim"  onclick="sw('Jim')">Jim <span class="mbadge b2">98</span></button>
+      <button class="mtab ae-tab" id="t-Lucas" onclick="sw('Lucas')">Lucas <span class="mbadge b2">110</span></button>
     </div>
   </div>
 
@@ -265,8 +296,7 @@ footer{text-align:center;padding:1.6rem;font-family:var(--mono);font-size:0.58re
         <button class="ftag"        data-f="other"         onclick="tf(this)">Other</button>
       </div>
       <button class="rbtn" id="rfb" onclick="loadFeed()">
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
-        Refresh
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>Refresh
       </button>
     </div>
     <div class="stage-txt" id="stageTxt"></div>
@@ -275,38 +305,46 @@ footer{text-align:center;padding:1.6rem;font-family:var(--mono);font-size:0.58re
 
   <!-- SEARCH -->
   <div id="p-search" style="display:none">
-    <div style="margin-bottom:1.4rem;">
-      <div class="sbox">
-        <input class="sinput" id="si" type="text" placeholder="Enter company — e.g. BlackRock, KKR, Amundi…" autocomplete="off"/>
-        <button class="sbtn" id="sb" onclick="runSearch()">
-          <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search
-        </button>
+    <!-- Recent + Hot panels -->
+    <div class="side-sections" id="sideSections">
+      <div class="side-box">
+        <div class="side-title"><span class="sticon">🕐</span>Recently Searched</div>
+        <div class="recent-list" id="recentList"><div class="recent-empty">No recent searches yet</div></div>
       </div>
-      <div class="qrow">
-        <span class="qlbl">Quick:</span>
-        <span class="qc" onclick="qs('BlackRock')">BlackRock</span>
-        <span class="qc" onclick="qs('KKR')">KKR</span>
-        <span class="qc" onclick="qs('Amundi')">Amundi</span>
-        <span class="qc" onclick="qs('Schroders')">Schroders</span>
-        <span class="qc" onclick="qs('Tikehau Capital')">Tikehau Capital</span>
-        <span class="qc" onclick="qs('Carlyle')">Carlyle</span>
-        <span class="qc" onclick="qs('Partners Group')">Partners Group</span>
-        <span class="qc" onclick="qs('ICG')">ICG</span>
-        <span class="qc" onclick="qs('DWS')">DWS</span>
-        <span class="qc" onclick="qs('Nuveen')">Nuveen</span>
+      <div class="side-box">
+        <div class="side-title"><span class="sticon">🔥</span>Hot Companies <span style="font-size:0.58rem;color:var(--t3);font-weight:400;font-family:var(--sans);">— flagged for priority outreach</span></div>
+        <div class="hot-list" id="hotList"><div class="hot-empty">No hot companies flagged yet</div></div>
       </div>
     </div>
-    <div id="sc"><div class="placeholder"><div class="phi">⌕</div><h3>Search any company</h3><p>Get ESG & sustainability news for any company from the last 30 days.</p></div></div>
+    <div class="sbox">
+      <input class="sinput" id="si" type="text" placeholder="Enter company — e.g. BlackRock, KKR, Amundi…" autocomplete="off"/>
+      <button class="sbtn" id="sb" onclick="runSearch()">
+        <svg width="14" height="14" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Search
+      </button>
+    </div>
+    <div class="qrow" style="margin-bottom:1.4rem;">
+      <span class="qlbl">Quick:</span>
+      <span class="qc" onclick="qs('BlackRock')">BlackRock</span>
+      <span class="qc" onclick="qs('KKR')">KKR</span>
+      <span class="qc" onclick="qs('Amundi')">Amundi</span>
+      <span class="qc" onclick="qs('Schroders')">Schroders</span>
+      <span class="qc" onclick="qs('Tikehau Capital')">Tikehau Capital</span>
+      <span class="qc" onclick="qs('Carlyle')">Carlyle</span>
+      <span class="qc" onclick="qs('Partners Group')">Partners Group</span>
+      <span class="qc" onclick="qs('ICG')">ICG</span>
+      <span class="qc" onclick="qs('DWS')">DWS</span>
+      <span class="qc" onclick="qs('Nuveen')">Nuveen</span>
+    </div>
+    <div id="sc"><div class="placeholder"><div class="phi">⌕</div><h3>Search any company</h3><p>Get ESG & sustainability news from the last 30 days. Flag companies as 🔥 Hot to prioritise your outreach.</p></div></div>
   </div>
 
-  <!-- AE PANELS (one per AE) -->
+  <!-- AE PANELS -->
   <div id="p-AE4"  style="display:none"><div id="ae-AE4"></div></div>
   <div id="p-AE5"  style="display:none"><div id="ae-AE5"></div></div>
   <div id="p-Dave" style="display:none"><div id="ae-Dave"></div></div>
   <div id="p-Jake" style="display:none"><div id="ae-Jake"></div></div>
   <div id="p-Jim"  style="display:none"><div id="ae-Jim"></div></div>
   <div id="p-Lucas" style="display:none"><div id="ae-Lucas"></div></div>
-
 </main>
 <footer>ESG Signal · Real articles via NewsAPI · Analysis by Claude (built-in) · 30-day window · Always verify before outreach</footer>
 
@@ -314,11 +352,10 @@ footer{text-align:center;padding:1.6rem;font-family:var(--mono);font-size:0.58re
 const CLAUDE_API = "https://api.anthropic.com/v1/messages";
 let PROXY_URL = "";
 let feedArticles = [], activeF = new Set(["esg","sustainability","impact","responsible","stewardship","research","other"]);
-let coData = null, coSub = "esg";
+let coData = null, coSub = "esg", currentSearchCo = "";
 let refreshTimer = null, refreshCountdown = 1800;
 const REFRESH_SEC = 1800;
-let currentTab = "feed";
-let aeCache = {}; // cache AE search results
+let aeCache = {};
 
 const AE_LISTS = {
   "AE4": ["BlackRock", "Vanguard Group", "Fidelity Investments", "BNY Investments", "Invesco", "Franklin Templeton", "Prudential Financial", "T. Rowe Price Group", "Northern Trust", "Geode Capital Management", "Ameriprise Financial", "Charles Schwab Investment", "Blackstone", "Power Financial", "Federated Hermes", "Principal Financial", "New York Life Investments", "Dimensional Fund Advisors", "Affiliated Managers Group", "Allspring Global Investments", "MassMutual", "Neuberger Berman", "Voya Financial", "U.S. Bancorp", "Mercer", "Dodge & Cox", "SEI Investments", "Jackson Financial", "Russell Investments", "NISA Investment", "Lazard", "Fisher Investments", "Guggenheim Investments", "American Century", "Raymond James", "Conning", "Robert W. Baird", "TCW Group", "Mesirow", "Payden & Rygel", "Artisan Partners", "StepStone Group", "Massachusetts PRIM", "Minnesota State Board of Investment", "NYC Teachers Retirement System", "Connecticut Retirement Plans", "OPTrust", "Northern LGPS", "Greater Manchester Pension Fund", "London CIV", "AP1 (First AP Fund)", "Elo", "ERAFP", "Abu Dhabi Investment Authority (ADIA)", "Emirates Investment Authority", "Colleges of Applied Arts and Technology (CAAT)", "Fonds de solidarité FTQ", "BP Pension Fund", "Unilever UK Pension Fund", "Smart Pension", "Pensioenfonds Detailhandel", "Statens pensjonsfond Norge (GPFN)", "Ircantec", "Apicil Group", "KZVK (Kirchliche Zusatzversorgungskasse)", "Helvetia Sammelstiftung", "PKA", "Indiana Public Retirement System (INPRS)", "Utah Retirement Systems", "Oklahoma Teachers Retirement System", "Contra Costa County Employees Retirement Association (CCCERA)", "Texas Municipal Retirement System (TMRS)", "Pensioenfonds Huisartsen", "Topdanmark Pension", "Avanza Pension (Sweden)", "Debeka", "National Pensions Reserve Fund (NPRF successor)", "General Organization for Social Insurance (GOSI)", "Morgan Lewis", "Baker Botts", "Cravath Swaine & Moore", "Hunton Andrews Kurth", "Stephenson Harwood", "McCarthy Tetrault", "Hadef & Partners", "Khoshaim & Associates", "Freshfields Germany", "BSP (Bonn Steichen & Partners)", "South Pole", "Carbon Trust", "Frontier Economics", "Georgeson", "Drees & Sommer", "Bank of America", "First Abu Dhabi Bank", "National Bank of Canada", "Dubai Islamic Bank", "Nykredit", "KeyCorp"],
@@ -335,37 +372,31 @@ const FEED_QUERIES = [
   '"head of ESG" OR "chief sustainability" OR "sustainability director"',
   '"net zero" OR "carbon neutral" investment fund',
   '"SFDR" OR "TCFD" OR "CSRD" asset manager',
-  '"SDG" OR "stewardship" OR "shareholder engagement" investment',
+  '"stewardship" OR "shareholder engagement" investment',
   '"ESG rating" OR "ESG score" OR "ESG report" financial',
-  '"green bond" OR "social bond" OR "sustainability bond"',
+  '"green bond" OR "social bond" sustainability',
   'sustainability "private equity" OR "asset management" OR "pension"',
-  '"responsible investment" OR "impact investing" 2025 2026',
 ];
 
 const TOPIC_MAP = {
   esg:[/\besg\b/,/environmental.social.gov/,/esg fund/,/esg invest/,/esg report/,/esg rating/,/esg score/],
-  sustainability:[/sustainab/,/green finance/,/climate risk/,/carbon neutral/,/net.zero/,/decarboni/,/climate action/],
-  impact:[/impact invest/,/impact fund/,/social impact/,/blended finance/],
-  responsible:[/responsible invest/,/responsible finance/,/\bpri\b/,/un sdg/,/\bsdg\b/,/socially responsible/],
-  stewardship:[/stewardship/,/shareholder engagement/,/proxy voting/,/activist/,/engagement campaign/],
-  research:[/esg research/,/sustainability report/,/annual report/,/climate report/,/esg survey/,/esg analysis/],
-  hire:[/appoint/,/hired/,/new.*head/,/chief sustainability/,/head of esg/,/sustainability director/],
-  fund:[/new fund/,/fund launch/,/fund raise/,/fundrais/,/closes.*fund/,/billion.*fund/],
-  regulation:[/\bsfdr\b/,/\btcfd\b/,/\bcsrd\b/,/article 8/,/article 9/,/taxonomy/,/disclosure regulat/],
+  sustainability:[/sustainab/,/green finance/,/climate risk/,/carbon neutral/,/net.zero/,/decarboni/],
+  impact:[/impact invest/,/impact fund/,/social impact/],
+  responsible:[/responsible invest/,/responsible finance/,/\bpri\b/,/\bsdg\b/,/socially responsible/],
+  stewardship:[/stewardship/,/shareholder engagement/,/proxy voting/,/activist/],
+  research:[/esg research/,/sustainability report/,/esg survey/,/esg analysis/],
+  hire:[/appoint/,/hired/,/chief sustainability/,/head of esg/,/sustainability director/],
+  fund:[/new fund/,/fund launch/,/fund raise/,/fundrais/],
+  regulation:[/\bsfdr\b/,/\btcfd\b/,/\bcsrd\b/,/article 8/,/article 9/,/taxonomy/],
 };
-const ESG_KW = [/\besg\b/,/sustainab/,/responsible invest/,/impact invest/,/stewardship/,/net.zero/,/carbon/,/climate finance/,/\bsfdr\b/,/\btcfd\b/,/\bcsrd\b/,/article [89]/,/\bpri\b/,/\bsdg\b/,/green bond/,/social bond/,/engagement/,/shareholder/,/esg rating/,/esg score/];
+const ESG_KW = [/\besg\b/,/sustainab/,/responsible invest/,/impact invest/,/stewardship/,/net.zero/,/carbon/,/climate finance/,/\bsfdr\b/,/\btcfd\b/,/\bcsrd\b/,/article [89]/,/\bpri\b/,/\bsdg\b/,/green bond/,/social bond/,/esg rating/,/esg score/];
 
-function getTags(a){
-  const txt=((a.title||"")+(a.description||"")+(a.content||"")).toLowerCase();
-  const tags=[];
-  for(const[tag,pats]of Object.entries(TOPIC_MAP)){if(pats.some(p=>p.test(txt)))tags.push(tag);}
-  if(!tags.length)tags.push("other");
-  return tags;
-}
+function getTags(a){const txt=((a.title||"")+(a.description||"")+(a.content||"")).toLowerCase();const tags=[];for(const[tag,pats]of Object.entries(TOPIC_MAP)){if(pats.some(p=>p.test(txt)))tags.push(tag);}if(!tags.length)tags.push("other");return tags;}
 function isESG(a){const txt=((a.title||"")+(a.description||"")).toLowerCase();return ESG_KW.some(p=>p.test(txt));}
 function fmtDate(iso){if(!iso)return"";try{return new Date(iso).toLocaleDateString("en-GB",{day:"numeric",month:"short",year:"numeric"});}catch{return iso.split("T")[0];}}
+function timeAgo(iso){if(!iso)return"";const d=Date.now()-new Date(iso).getTime();if(d<60000)return"just now";if(d<3600000)return Math.floor(d/60000)+"m ago";if(d<86400000)return Math.floor(d/3600000)+"h ago";return Math.floor(d/86400000)+"d ago";}
 
-// SETUP
+// ── SETUP ──
 function saveProxy(){
   let url=document.getElementById("proxyUrl").value.trim().replace(/\/+$/,"");
   const err=document.getElementById("setupErr");
@@ -376,7 +407,7 @@ function saveProxy(){
 function clearProxy(){if(!confirm("Reset backend URL?"))return;localStorage.removeItem("esg_proxy_url");location.reload();}
 function tryAutoLoad(){const u=localStorage.getItem("esg_proxy_url");if(u){PROXY_URL=u;document.getElementById("setup").style.display="none";init();}}
 
-function init(){loadFeed();startTimer();}
+function init(){loadFeed();startTimer();renderRecent();renderHot();}
 function startTimer(){
   clearInterval(refreshTimer);refreshCountdown=REFRESH_SEC;
   refreshTimer=setInterval(()=>{
@@ -388,27 +419,76 @@ function startTimer(){
   },1000);
 }
 
-// TAB SWITCHING
+// ── TABS ──
 function sw(tab){
-  currentTab=tab;
-  const allPanels=["feed","search","AE4","AE5","Dave","Jake","Jim","Lucas"];
-  allPanels.forEach(p=>{const el=document.getElementById("p-"+p);if(el)el.style.display="none";});
+  const all=["feed","search","AE4","AE5","Dave","Jake","Jim","Lucas"];
+  all.forEach(p=>{const el=document.getElementById("p-"+p);if(el)el.style.display="none";});
   const show=document.getElementById("p-"+tab);if(show)show.style.display="";
   document.querySelectorAll(".mtab").forEach(b=>b.classList.remove("active"));
   const active=document.getElementById("t-"+tab);if(active)active.classList.add("active");
-  // Load AE view if switching to AE tab and not loaded yet
-  if(["AE4","AE5","Dave","Jake","Jim","Lucas"].includes(tab)){
-    loadAEView(tab);
-  }
+  if(["AE4","AE5","Dave","Jake","Jim","Lucas"].includes(tab)) initAEPanel(tab);
+  if(tab==="search"){renderRecent();renderHot();}
+}
+function tf(btn){const f=btn.dataset.f;activeF.has(f)?(activeF.delete(f),btn.classList.remove("on")):(activeF.add(f),btn.classList.add("on"));renderFeed();}
+
+// ════════════════════════════════
+//  RECENT HISTORY
+// ════════════════════════════════
+function getRecent(){return JSON.parse(localStorage.getItem("esg_recent")||"[]");}
+function addRecent(company){
+  let r=getRecent().filter(x=>x.name!==company);
+  r.unshift({name:company,time:new Date().toISOString()});
+  r=r.slice(0,8);
+  localStorage.setItem("esg_recent",JSON.stringify(r));
+  renderRecent();
+}
+function renderRecent(){
+  const el=document.getElementById("recentList");if(!el)return;
+  const r=getRecent();
+  if(!r.length){el.innerHTML='<div class="recent-empty">No recent searches yet</div>';return;}
+  el.innerHTML=r.map(x=>`
+    <div class="recent-item" onclick="qs('${x.name.replace(/'/g,"\\'")}')">
+      <span class="recent-name">${h(x.name)}</span>
+      <span class="recent-time">${timeAgo(x.time)}</span>
+    </div>`).join("");
 }
 
-function tf(btn){
-  const f=btn.dataset.f;
-  activeF.has(f)?(activeF.delete(f),btn.classList.remove("on")):(activeF.add(f),btn.classList.add("on"));
-  renderFeed();
+// ════════════════════════════════
+//  HOT COMPANIES
+// ════════════════════════════════
+function getHot(){return JSON.parse(localStorage.getItem("esg_hot")||"[]");}
+function isHot(company){return getHot().includes(company);}
+function toggleHot(company){
+  let hot=getHot();
+  if(hot.includes(company)){hot=hot.filter(x=>x!==company);}
+  else{hot.unshift(company);hot=hot.slice(0,20);}
+  localStorage.setItem("esg_hot",JSON.stringify(hot));
+  renderHot();
+  // Update any visible hot buttons
+  document.querySelectorAll(".hot-btn").forEach(btn=>{
+    if(btn.dataset.company===company){
+      btn.classList.toggle("is-hot",isHot(company));
+      btn.textContent=isHot(company)?"🔥 Hot — Remove flag":"🔥 Flag as Hot";
+    }
+  });
+  // Re-render AE chips if visible
+  const activeAE=["AE4","AE5","Dave","Jake","Jim","Lucas"].find(ae=>document.getElementById("p-"+ae)?.style.display!=="none");
+  if(activeAE) renderAEChips(activeAE);
+}
+function renderHot(){
+  const el=document.getElementById("hotList");if(!el)return;
+  const hot=getHot();
+  if(!hot.length){el.innerHTML='<div class="hot-empty">No hot companies flagged yet</div>';return;}
+  el.innerHTML=hot.map(co=>`
+    <div class="hot-chip" onclick="qs('${co.replace(/'/g,"\\'")}')">
+      🔥 ${h(co)}
+      <span class="remove-hot" onclick="event.stopPropagation();toggleHot('${co.replace(/'/g,"\\'")}')">✕</span>
+    </div>`).join("");
 }
 
-// NEWS FETCH
+// ════════════════════════════════
+//  NEWS FETCH
+// ════════════════════════════════
 async function newsFetch(query,pageSize=10){
   const from=new Date(Date.now()-30*24*60*60*1000).toISOString().split("T")[0];
   const params=new URLSearchParams({q:query,pageSize,from});
@@ -420,7 +500,7 @@ async function newsFetch(query,pageSize=10){
 function dedup(articles){const seen=new Set();return articles.filter(a=>{const k=a.url||a.title;if(seen.has(k))return false;seen.add(k);return true;});}
 function enforce30(articles){const c=Date.now()-30*24*60*60*1000;return articles.filter(a=>a.publishedAt&&new Date(a.publishedAt).getTime()>c);}
 
-// CLAUDE
+// ── CLAUDE ──
 async function claudeAnalyse(articles){
   const results={};
   for(let i=0;i<articles.length;i+=6){
@@ -433,19 +513,17 @@ async function claudeAnalyse(articles){
           messages:[{role:"user",content:prompt}]})});
       const d=await r.json();
       const txt=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("").trim();
-      const clean=txt.replace(/```json\n?/g,"").replace(/```\n?/g,"").trim();
-      const arr=JSON.parse(clean);
+      const arr=JSON.parse(txt.replace(/```json\n?/g,"").replace(/```\n?/g,"").trim());
       batch.forEach((a,idx)=>{if(arr[idx])results[a.url||a.title]=arr[idx];});
     }catch(e){batch.forEach(a=>{results[a.url||a.title]={summary:"",sales_signal:"",tags:getTags(a),relevance:"medium"};});}
   }
   return results;
 }
-
 async function claudeContext(company,headlines){
   try{
     const r=await fetch(CLAUDE_API,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:350,
-        messages:[{role:"user",content:`Headlines about ${company}:\n${headlines||"(none)"}\n\n1. 2-sentence ESG posture summary for ${company}\n2. Best outreach angle selling ESG data software NOW\n\nReturn ONLY JSON: {"context":"...","outreach_angle":"..."}`}]})});
+        messages:[{role:"user",content:`Headlines about ${company}:\n${headlines||"(none)"}\n\n1. 2-sentence ESG posture summary for ${company}\n2. Best outreach angle selling ESG data software NOW\n\nONLY JSON: {"context":"...","outreach_angle":"..."}`}]})});
     const d=await r.json();
     const txt=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("").trim();
     const clean=txt.replace(/```json\n?/g,"").replace(/```\n?/g,"").trim();
@@ -453,33 +531,26 @@ async function claudeContext(company,headlines){
   }catch{return{context:"",outreach_angle:""};}
 }
 
-// FEED
+// ── FEED ──
 async function loadFeed(){
   const btn=document.getElementById("rfb");btn.disabled=true;btn.classList.add("spin");setStage("");
-  document.getElementById("fc").innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching ESG news…</div><div class="lsteps"><div class="lstep on" id="ls1">⟳ Querying news across ESG topics…</div><div class="lstep" id="ls2">⟳ Deduplicating &amp; enforcing 30-day window…</div><div class="lstep" id="ls3">⟳ Claude AI analysing &amp; writing sales signals…</div><div class="lstep" id="ls4">⟳ Rendering feed…</div></div></div>`;
+  document.getElementById("fc").innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching ESG news…</div><div class="lsteps"><div class="lstep on" id="ls1">⟳ Querying NewsAPI…</div><div class="lstep" id="ls2">⟳ Deduplicating &amp; 30-day window…</div><div class="lstep" id="ls3">⟳ Claude AI analysing…</div><div class="lstep" id="ls4">⟳ Rendering…</div></div></div>`;
   try{
     lsDone(1);setStage("Fetching…");
     const batches=await Promise.all(FEED_QUERIES.map(q=>newsFetch(q,8).catch(()=>[])));
     let raw=dedup(enforce30(batches.flat()));
     raw.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
     raw=raw.slice(0,40);
-    lsDone(2);setStage(`${raw.length} articles — analysing…`);
+    lsDone(2);setStage(`${raw.length} articles — analysing with Claude…`);
     lsDone(3);
     const analysis=await claudeAnalyse(raw);
-    feedArticles=raw.map(a=>{
-      const ai=analysis[a.url||a.title]||{};
-      const local=getTags(a);
-      return{...a,_ai:{...ai,tags:[...new Set([...(ai.tags||[]),...local])]},_tags:[...new Set([...(ai.tags||[]),...local])]};
-    });
+    feedArticles=raw.map(a=>{const ai=analysis[a.url||a.title]||{};const local=getTags(a);return{...a,_ai:{...ai,tags:[...new Set([...(ai.tags||[]),...local])]},_tags:[...new Set([...(ai.tags||[]),...local])]};});
     feedArticles.sort((a,b)=>({high:0,medium:1,low:2}[a._ai.relevance]||1)-({high:0,medium:1,low:2}[b._ai.relevance]||1)||new Date(b.publishedAt)-new Date(a.publishedAt));
     lsDone(4);
     document.getElementById("feedBadge").textContent=feedArticles.length;
     document.getElementById("proxyStat").innerHTML=`<div class="bdot"></div>${feedArticles.length} articles · ${new Date().toLocaleTimeString()}`;
     setStage("");renderFeed();startTimer();
-  }catch(e){
-    document.getElementById("fc").innerHTML=`<div class="errbox">⚠ ${h(e.message)}<br><br>If Render is sleeping, wait 30 seconds and click Refresh.</div>`;
-    setStage("");
-  }
+  }catch(e){document.getElementById("fc").innerHTML=`<div class="errbox">⚠ ${h(e.message)}<br><br>If Render is sleeping wait 30s then refresh.</div>`;setStage("");}
   btn.disabled=false;btn.classList.remove("spin");
 }
 function lsDone(n){const el=document.getElementById("ls"+n);if(el)el.classList.add("done");}
@@ -491,30 +562,51 @@ function renderFeed(){
   el.innerHTML=`<div class="news-grid">${items.map((a,i)=>cardHtml(a,i,"feed")).join("")}</div>`;
 }
 
-// AE VIEW
-async function loadAEView(ae){
-  const container=document.getElementById("ae-"+ae);
-  if(!container)return;
-  // If already loaded and cached, just re-render
-  if(aeCache[ae]){renderAEResults(ae,aeCache[ae]);return;}
-
+// ── AE PANELS ──
+function initAEPanel(ae){
+  const container=document.getElementById("ae-"+ae);if(!container)return;
   const companies=AE_LISTS[ae]||[];
+  const hot=getHot();
+  // Sort: hot companies first
+  const sorted=[...companies].sort((a,b)=>{const ah=hot.includes(a)?0:1,bh=hot.includes(b)?0:1;return ah-bh;});
   container.innerHTML=`
     <div class="ae-header">
       <div class="ae-info">
         <div class="ae-name">${ae}'s Accounts</div>
-        <div class="ae-meta"><span>Companies: <em>${companies.length}</em></span><span>Window: <em>last 30 days</em></span><span>Source: <em>NewsAPI</em></span></div>
+        <div class="ae-meta"><span>Companies: <em>${companies.length}</em></span><span>Hot: <em>${companies.filter(c=>hot.includes(c)).length}</em></span><span>Window: <em>last 30 days</em></span></div>
       </div>
       <button class="ae-search-btn" id="ae-btn-${ae}" onclick="searchAENews('${ae}')">
-        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
-        Load ${ae}'s News
+        <svg width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" style="display:inline;vertical-align:middle;margin-right:4px;"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>Load ${ae}'s News
       </button>
     </div>
-    <div class="ae-company-chips">${companies.map(c=>`<span class="ae-chip" onclick="swSearch('${c.replace(/'/g,"\\'")}\')">${c}</span>`).join("")}</div>
+    <div class="ae-chips-wrap">
+      <div class="ae-chips-header">
+        <span class="ae-chips-label">All companies — click to search · 🔥 to flag as hot</span>
+        <span class="ae-chips-hint">${hot.filter(c=>companies.includes(c)).length} flagged hot</span>
+      </div>
+      <div class="ae-chips" id="chips-${ae}"></div>
+    </div>
     <div id="ae-results-${ae}">
-      <div class="placeholder"><div class="phi">◈</div><h3>Click "Load ${ae}'s News"</h3><p>Searches NewsAPI for ESG & sustainability news about all ${companies.length} of ${ae}'s assigned companies in the last 30 days.</p></div>
+      <div class="placeholder"><div class="phi">◈</div><h3>Click "Load ${ae}'s News"</h3><p>Fetch ESG & sustainability news for all ${companies.length} of ${ae}'s companies. Or click any company chip to search individually.</p></div>
     </div>`;
+  renderAEChips(ae);
 }
+
+function renderAEChips(ae){
+  const el=document.getElementById("chips-"+ae);if(!el)return;
+  const companies=AE_LISTS[ae]||[];
+  const hot=getHot();
+  const sorted=[...companies].sort((a,b)=>{const ah=hot.includes(a)?0:1,bh=hot.includes(b)?0:1;return ah-bh;});
+  el.innerHTML=sorted.map(co=>`
+    <div class="ae-chip ${hot.includes(co)?"is-hot":""}" onclick="swToSearch('${co.replace(/'/g,"\\'")}')">
+      ${hot.includes(co)?"🔥 ":""}${h(co)}
+      <span class="flag-btn" onclick="event.stopPropagation();toggleHot('${co.replace(/'/g,"\\'")}');renderAEChips('${ae}')" title="${hot.includes(co)?"Remove hot flag":"Flag as hot"}">
+        ${hot.includes(co)?"✕":"🔥"}
+      </span>
+    </div>`).join("");
+}
+
+function swToSearch(company){sw("search");document.getElementById("si").value=company;runSearch();}
 
 async function searchAENews(ae){
   const companies=AE_LISTS[ae]||[];
@@ -522,70 +614,52 @@ async function searchAENews(ae){
   const resultsEl=document.getElementById("ae-results-"+ae);
   if(!btn||!resultsEl)return;
   btn.disabled=true;btn.textContent="Searching…";
-  resultsEl.innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Searching ESG news for ${ae}'s ${companies.length} companies…</div><div class="lsteps"><div class="lstep on">⟳ Fetching news from NewsAPI…</div><div class="lstep">⟳ Filtering for ESG relevance…</div><div class="lstep">⟳ Claude AI analysis…</div></div></div>`;
-
+  resultsEl.innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching ESG news for ${ae}'s ${companies.length} companies…</div></div>`;
   try{
-    // Search using top companies (most recognisable names) to stay within API limits
-    // Use first 10 most prominent companies for the query
-    const topCos=companies.slice(0,12);
+    const hot=getHot();
+    const hotCos=companies.filter(c=>hot.includes(c));
+    const topCos=hotCos.length>0?hotCos:companies.slice(0,12);
     const queryStr=topCos.map(c=>c.split(" ")[0]).filter(w=>w.length>3).slice(0,8).join(" OR ");
     const query=`(${queryStr}) AND (ESG OR sustainability OR "responsible investment" OR "impact fund" OR "net zero")`;
-
     const raw=dedup(enforce30(await newsFetch(query,20).catch(()=>[])));
     raw.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
-
-    // Filter: only articles mentioning AE's companies
     const relevant=raw.filter(a=>{
       const txt=((a.title||"")+(a.description||"")).toLowerCase();
       return companies.some(co=>txt.includes(co.toLowerCase())||txt.includes(co.split(" ")[0].toLowerCase()));
     });
-
     const analysis=await claudeAnalyse(relevant);
     const results=relevant.map(a=>{
       const ai=analysis[a.url||a.title]||{};
-      const matchedCo=companies.find(co=>{
-        const txt=((a.title||"")+(a.description||"")).toLowerCase();
-        return txt.includes(co.toLowerCase())||txt.includes(co.split(" ")[0].toLowerCase());
-      })||"";
-      return{...a,_ai:{...ai,tags:[...new Set([...(ai.tags||[]),...getTags(a)])]},_tags:[...new Set([...(ai.tags||[]),...getTags(a)])],_matchedCo:matchedCo};
+      const matchedCo=companies.find(co=>{const txt=((a.title||"")+(a.description||"")).toLowerCase();return txt.includes(co.toLowerCase())||txt.includes(co.split(" ")[0].toLowerCase());})||"";
+      return{...a,_ai:{...ai,tags:[...new Set([...(ai.tags||[]),...getTags(a)])]},_tags:[...new Set([...(ai.tags||[]),...getTags(a)])],_matchedCo:matchedCo,_isHot:hot.includes(matchedCo)};
     });
-
+    // Sort: hot matches first
+    results.sort((a,b)=>(a._isHot?0:1)-(b._isHot?0:1)||new Date(b.publishedAt)-new Date(a.publishedAt));
     aeCache[ae]=results;
-    renderAEResults(ae,results);
-  }catch(e){
-    resultsEl.innerHTML=`<div class="errbox">⚠ ${h(e.message)}</div>`;
-  }
+    if(!results.length){resultsEl.innerHTML=`<div class="nores"><p>No ESG news found for ${ae}'s companies in the last 30 days. Click any company chip to search individually.</p></div>`;}
+    else{resultsEl.innerHTML=`<div style="font-family:var(--mono);font-size:0.65rem;color:var(--acc);margin-bottom:0.8rem;">${results.length} ESG articles found across ${ae}'s accounts${results.filter(r=>r._isHot).length>0?" · 🔥 Hot company matches shown first":""}</div><div class="news-grid">${results.map((a,i)=>cardHtml(a,i,"ae-"+ae)).join("")}</div>`;}
+  }catch(e){resultsEl.innerHTML=`<div class="errbox">⚠ ${h(e.message)}</div>`;}
   btn.disabled=false;btn.textContent=`↻ Refresh ${ae}'s News`;
 }
 
-function renderAEResults(ae,results){
-  const el=document.getElementById("ae-results-"+ae);if(!el)return;
-  if(!results.length){
-    el.innerHTML=`<div class="nores"><p>No ESG news found for ${ae}'s companies in the last 30 days. Try clicking a company chip above to search individually.</p></div>`;
-    return;
-  }
-  el.innerHTML=`<div style="font-family:var(--mono);font-size:0.65rem;color:var(--acc);margin-bottom:0.8rem;">Found ${results.length} ESG articles across ${ae}'s accounts</div><div class="news-grid">${results.map((a,i)=>cardHtml(a,i,"ae-"+ae,true)).join("")}</div>`;
-}
-
-function swSearch(company){sw("search");document.getElementById("si").value=company;runSearch();}
-
-// COMPANY SEARCH
+// ── SEARCH ──
 function qs(n){document.getElementById("si").value=n;sw("search");runSearch();}
 document.addEventListener("DOMContentLoaded",()=>{
   document.getElementById("si").addEventListener("keydown",e=>{if(e.key==="Enter")runSearch();});
   tryAutoLoad();
 });
+
 async function runSearch(){
   const q=document.getElementById("si").value.trim();if(!q)return;
-  sw("search");document.getElementById("sb").disabled=true;coData=null;coSub="esg";
+  sw("search");document.getElementById("sb").disabled=true;coData=null;coSub="esg";currentSearchCo=q;
+  addRecent(q);
   document.getElementById("sc").innerHTML=`<div class="loader"><div class="lring"></div><div class="ltxt">Fetching news for "${h(q)}"…</div><div class="lsteps"><div class="lstep on" id="cs1">⟳ Searching NewsAPI…</div><div class="lstep" id="cs2">⟳ Classifying ESG vs general…</div><div class="lstep" id="cs3">⟳ Claude AI analysis…</div><div class="lstep" id="cs4">⟳ Building outreach context…</div></div></div>`;
   try{
     const[esgRaw,genRaw]=await Promise.all([newsFetch(`"${q}" ESG sustainability responsible investment`,15),newsFetch(q,10)]);
     for(let i=1;i<=2;i++){const el=document.getElementById("cs"+i);if(el)el.classList.add("done");}
     const all=dedup(enforce30([...esgRaw,...genRaw]));
     all.sort((a,b)=>new Date(b.publishedAt)-new Date(a.publishedAt));
-    const esgA=all.filter(a=>isESG(a));
-    const othA=all.filter(a=>!isESG(a));
+    const esgA=all.filter(a=>isESG(a)),othA=all.filter(a=>!isESG(a));
     const analysis=await claudeAnalyse(all);
     for(let i=3;i<=3;i++){const el=document.getElementById("cs"+i);if(el)el.classList.add("done");}
     const context=await claudeContext(q,esgA.slice(0,5).map(a=>a.title).join("\n"));
@@ -599,15 +673,21 @@ async function runSearch(){
   }catch(e){document.getElementById("sc").innerHTML=`<div class="errbox">⚠ ${h(e.message)}</div>`;}
   document.getElementById("sb").disabled=false;
 }
+
 function renderCoResults(){
   if(!coData)return;
-  const d=coData;
+  const d=coData,hot=isHot(d.company);
   document.getElementById("sc").innerHTML=`
     <div class="co-hdr">
-      <div class="co-name">${h(d.company)}</div>
+      <div class="co-name">${h(d.company)} ${hot?'<span class="co-hot-badge">🔥 Hot</span>':''}</div>
       <div class="co-stats"><span>ESG: <em>${d.esg.length}</em></span><span>Other: <em>${d.other.length}</em></span><span>Window: <em>last 30 days</em></span></div>
       ${d.context?.context?`<div class="co-ctx">${h(d.context.context)}</div>`:""}
       ${d.context?.outreach_angle?`<div class="co-angle"><div class="albl">⚡ Best Outreach Angle</div><div class="atxt">${h(d.context.outreach_angle)}</div></div>`:""}
+      <div class="co-actions">
+        <button class="co-action-btn hot-btn ${hot?"is-hot":""}" data-company="${h(d.company)}" onclick="toggleHot('${d.company.replace(/'/g,"\\'")}');renderCoResults();">
+          ${hot?"🔥 Hot — Remove flag":"🔥 Flag as Hot"}
+        </button>
+      </div>
     </div>
     <div class="stabs">
       <button class="stab active" id="st1" onclick="sst(\'esg\',this)">◈ ESG & Sustainability <span class="scnt">${d.esg.length}</span></button>
@@ -624,8 +704,8 @@ function renderSubTab(t){
   el.innerHTML=`<div class="news-grid">${items.map((a,i)=>cardHtml(a,i,"co-"+t)).join("")}</div>`;
 }
 
-// CARD
-function cardHtml(article,i,ns,showCo=false){
+// ── CARD ──
+function cardHtml(article,i,ns){
   const isESGCard=ns==="feed"||ns==="co-esg"||ns.startsWith("ae-");
   const tags=[...new Set(article._tags||["other"])].slice(0,3);
   const tagsHtml=tags.map(t=>`<span class="tag t-${t}">${t}</span>`).join("");
@@ -634,11 +714,14 @@ function cardHtml(article,i,ns,showCo=false){
   const url=article.url||null;
   const gnews=`https://news.google.com/search?q=${encodeURIComponent(article.title||"")}`;
   const matchedCo=article._matchedCo||"";
+  const hotMatch=article._isHot;
   return`
-  <div class="card ${isESGCard?"esg":""}" style="animation-delay:${Math.min(i,15)*0.04}s">
+  <div class="card ${isESGCard?"esg":""} ${hotMatch?"hot-card":""}" style="animation-delay:${Math.min(i,15)*0.04}s;${hotMatch?"border-color:rgba(239,68,68,0.3);":""}">
     <div class="ctop">
       <div class="ctags">
-        ${matchedCo?`<span class="tag" style="background:rgba(16,212,168,0.15);color:var(--acc);border:1px solid rgba(16,212,168,0.3);">🏢 ${h(matchedCo)}</span>`:""}
+        ${hotMatch?`<span class="tag" style="background:rgba(239,68,68,0.12);color:#fca5a5;border:1px solid rgba(239,68,68,0.25);">🔥 Hot</span>`:""}
+        ${matchedCo&&!hotMatch?`<span class="tag" style="background:rgba(16,212,168,0.12);color:var(--acc);border:1px solid rgba(16,212,168,0.25);">🏢 ${h(matchedCo)}</span>`:""}
+        ${hotMatch?`<span class="tag" style="background:rgba(16,212,168,0.12);color:var(--acc);border:1px solid rgba(16,212,168,0.25);">🏢 ${h(matchedCo)}</span>`:""}
         ${tagsHtml}
       </div>
       <div class="cmeta">${ns==="feed"?`<span class="cco-pill">${h(srcName)}</span>`:""}</div>
@@ -658,15 +741,14 @@ function cardHtml(article,i,ns,showCo=false){
     </div>
     <div class="cfoot">
       <button class="obtn" onclick="draftOutreach('${ns}',${i},this)">
-        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Draft Outreach
+        <svg width="12" height="12" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>Draft Outreach
       </button>
     </div>
     <div class="opanel" id="op-${ns}-${i}"></div>
   </div>`;
 }
 
-// OUTREACH
+// ── OUTREACH ──
 async function draftOutreach(ns,i,btn){
   const pid=`op-${ns}-${i}`;const panel=document.getElementById(pid);if(!panel)return;
   if(panel.classList.contains("open")){panel.classList.remove("open");return;}
@@ -684,7 +766,7 @@ async function draftOutreach(ns,i,btn){
   try{
     const r=await fetch(CLAUDE_API,{method:"POST",headers:{"Content-Type":"application/json"},
       body:JSON.stringify({model:"claude-sonnet-4-20250514",max_tokens:550,
-        messages:[{role:"user",content:`B2B cold outreach email for ESG/sustainability reporting software.\nTarget: ${company}\nNews: ${article.title}\nSummary: ${article._ai?.summary||article.description||""}\nSales signal: ${article._ai?.sales_signal||""}\nSource: ${article.source?.name||""} (${fmtDate(article.publishedAt)})\n\nRules: MAX 5 sentences. Reference the news. Connect to ESG pain point. Soft CTA. Warm, professional. No product name.\nFormat: Line 1=subject only. Blank line. Email body. Nothing else.`}]})});
+        messages:[{role:"user",content:`B2B cold outreach for ESG/sustainability reporting software.\nTarget: ${company}\nNews: ${article.title}\nSummary: ${article._ai?.summary||article.description||""}\nSales signal: ${article._ai?.sales_signal||""}\nSource: ${article.source?.name||""} (${fmtDate(article.publishedAt)})\n\nRules: MAX 5 sentences. Reference the news. Connect to ESG pain point. Soft CTA. Warm, professional. No product name.\nFormat: Line 1=subject only. Blank line. Email body. Nothing else.`}]})});
     const d=await r.json();
     const txt=(d.content||[]).filter(b=>b.type==="text").map(b=>b.text).join("").trim();
     const lines=txt.split("\n");
